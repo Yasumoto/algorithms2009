@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #double LateXing for bib consistency
 pdflatex $1.tex
