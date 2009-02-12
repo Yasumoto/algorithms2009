@@ -1,0 +1,238 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   TEMPLATE MAIN FILE                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,reqno,sumlimits]{amsart}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{url}
+%\textwidth 6.2in
+%\oddsidemargin.20in
+%\evensidemargin.35in
+%%\lineskip 1in
+%%\baselineskip.55cm
+
+% Read in specially defined commands
+% Change margins and baselinestretch in draft mode
+\def\draft{
+% make margins smaller
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.65in}
+\addtolength{\textheight}{1in}
+\addtolength{\textwidth}{1.5in}
+% A more reasonable baselinestretch, is still nearly doublespaced.
+\def\baselinestretch{1.4}
+}
+
+%\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+%\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%              Theorems                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}{Notation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%      Definitions and Commands                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\A}{{\mathbb A}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\D}{{\mathbb D}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\h}{{\mathbb H}}
+\newcommand{\CP}{{\mathbb C}{\mathbb P}}
+\newcommand{\I}{{\mathbb I}}
+\newcommand{\N}{{\mathbb N}}
+%
+\newcommand{\calA}{{\mathcal A}}
+\newcommand{\calB}{{\mathcal B}}
+\newcommand{\calC}{{\mathcal C}}
+\newcommand{\calD}{{\mathcal D}}
+\newcommand{\calE}{{\mathcal E}}
+\newcommand{\calF}{{\mathcal F}}
+\newcommand{\calG}{{\mathcal G}}
+\newcommand{\calH}{{\mathcal H}}
+\newcommand{\calI}{{\mathcal I}}
+\newcommand{\calK}{{\mathcal K}}
+\newcommand{\calM}{{\mathcal M}}
+\newcommand{\calO}{{\mathcal O}}
+\newcommand{\calP}{{\mathcal P}}
+\newcommand{\calR}{{\mathcal R}}
+\newcommand{\calS}{{\mathcal S}}
+\newcommand{\calL}{{\mathcal L}}
+\newcommand{\calX}{{\mathcal X}}
+\newcommand{\calU}{{\mathcal U}}
+\newcommand{\calV}{{\mathcal V}}
+\newcommand{\calZ}{{\mathcal Z}}
+%
+\newcommand{\ggoth}{{\mathfrak  g}}
+\newcommand{\ugoth}{{\mathfrak  u}}
+\newcommand{\hgoth}{{\mathfrak  h}}
+%%
+\newcommand{\1}{{\bf 1}}
+\newcommand{\acts}{{\circlearrowright}}
+\newcommand{\ex}[1]{{e^{#1}}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\iso}{\stackrel{\simeq}{\longrightarrow}}
+\newcommand{\spinc}{$\text{spin}^c$}
+\newcommand{\Dirac}{\not\!\!D}
+\newcommand{\inc}{\hookrightarrow}
+%%
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Hor}{\operatorname{Hor}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Map}{\operatorname{Map}}
+\newcommand{\Diff}{\operatorname{Diff}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\ad}{{\operatorname{ad\,}}}
+\newcommand{\sign}{{\operatorname{sign}}}
+\newcommand{\grad}{{\operatorname{grad}}}
+\newcommand{\coker}{{\operatorname{coker}}}
+\newcommand{\dett}{{\operatorname{det}}}
+\newcommand{\ch}{{\operatorname{ch}}}
+\newcommand{\rk}{{\operatorname{rk}}}
+\newcommand{\maxx}{{\operatorname{max}}}
+\newcommand{\minn}{{\operatorname{min}}}
+\newcommand{\id}{{\operatorname{id}}}
+\newcommand{\ind}{{\operatorname{ind}}}
+\newcommand{\Ind}{{\operatorname{Ind}}}
+\newcommand{\spann}{{\operatorname{span}}}
+\newcommand{\Spin}{{\operatorname{Spin}}}
+\newcommand{\Pin}{{\operatorname{Pin}}}
+\newcommand{\im}{{\operatorname{Im}}}
+\renewcommand{\Im}{{\operatorname{Im}}}
+\newcommand{\dimm}{{\operatorname{dim}}}
+\newcommand{\cl}{{\operatorname{cl}}}
+%%
+\newcommand{\tM}{{\tilde{M}}}
+\newcommand{\tC}{{\tilde{C}}}
+\newcommand{\tE}{{\tilde{E}}}
+\newcommand{\tF}{{\tilde{F}}}
+\newcommand{\talpha}{{\tilde{\alpha}}}
+%%
+\newcommand{\zbar}{\overline{z}}
+\newcommand{\wbar}{\overline{w}}
+\newcommand{\phibar}{\overline{\phi}}
+\newcommand{\psibar}{\overline{\psi}}
+\newcommand{\Bbar}{\overline{B}}
+\newcommand{\Cbar}{\overline{C}}
+\newcommand{\inv}{^{-1}}
+%%      
+\newcommand{\rb}[1]{\raisebox{0pt}[0pt][0pt]{#1}}
+\newsavebox{\savepar}
+\newenvironment{boxit}{\begin{lrbox}{\savepar}\begin{minipage}[b]{.5in}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\savepar}}}
+%%\newcommand{\ip}[1]{\langle\! #1 \! \rangle}
+\newcommand{\ip}[1]{\langle #1 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+%
+%\newcommand{\remark}{{\tt ?}\marginpar{\Large\centering ?}}
+\newcommand{\rremark}{\marginpar{\Large\centering ?}}
+\newcommand{\Remark}[1]{\textsc{\tiny{[#1]}}\rremark}
+\newcommand{\todo}{\textsc{Todo!}\marginpar{\Large\centering !}}
+%
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{{\thesection{.}}\arabic{equation}}
+\newcounter{dummy}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title[Short Title]{A proof that differentiability implies continuity}
+\author{Your Name Here}
+
+
+%\begin{abstract}
+%The abstract
+%\end{abstract}
+
+\maketitle
+
+%\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section {Problem 1}
+Here is some example math for the first problem.
+
+\begin{definition}
+\emph{A function} $f:I\to\R$ \emph{is} continuous at a point $a\in I$, \emph{if and only if the values of} $f(x)$ \emph{approach as} $x$ \emph{approaches} $a$.
+\emph{Moreover,} $f$ \emph{is called} continuous on the interval $I$ \emph{if it is continuous at each point of} $I$.
+\end{definition}
+
+\begin{definition}
+\emph{A function} $f:I\to\R$ \emph{is} differentiable \emph{at} $a\in I$, \emph{if and only if it is continuous at} $a$.
+\emph{Moreover,} $f$ \emph{is called} differentiable on the interval $I$ \emph{if it is continuous at all points on} $I$.
+\end{definition}
+
+\section{Problem 2}
+We can pretend this is the second problem.  We can also cite someone to look appear thorough.
+We'll cite Linstead so his h-factor goes up~\cite{linstead:nips07}.
+\begin{theorem}
+Suppose $I$ is an open interval on $\R$, and $f:I\to\R$ is differentiable at $a\in I$. Then $f$ is continuous at $a$. Moreover, if $f$ is differentiable on $I$, then $f$ is continuous on $I$.
+\end{theorem}
+
+\begin{proof}
+Choose arbitrarily $a\in I$. We have to show that $f(x)\to f(a)$, when $x\to a$.
+
+First, if $x\in I, \quad x\neq a$, then
+$$
+f(x)-f(a) = \frac{f(x)-f(a)}{x-a}\cdot (x-a).
+$$
+Thus, if $f'(a)$ is the derivative of $f$ at $a$, we have
+
+\begin{eqnarray}
+\lim_{x \to a} (f(x) - f(a)) &=& \lim_{x \to a} \frac{f(x) - f(a)}{x-a} \cdot (x-a)\nonumber\\
+&=& \lim_{x \to a} \frac{f(x) - f(a)}{x-a} \cdot \lim_{x \to a}(x-a)\nonumber\\
+&=& f'(a) \cdot 0 = 0,\nonumber
+\end{eqnarray}
+where the second equality is justified since both limits on the second line exist.
+
+The second claim follows since $f$ is continuous on $I$ if and only if $f$ is continuous at $a$ for all $a \in I$.
+
+\end{proof}
+
+\section{Problem 3}
+And this is the third problem.  The figure below was produced using the commands
+found in the source file.
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=3.5in]{curve_fit.pdf}}
+  }
+  \caption{Fit of Parameterized Model to Full Repository Tangling Curve}
+  \label{fig:fit}
+\end{figure}
+
+\bibliographystyle{abbrv}
+\bibliography{bibliography}
+  
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+
