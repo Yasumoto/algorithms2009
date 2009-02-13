@@ -2,7 +2,6 @@
 
 #double LateXing for bib consistency
 pdflatex $1.tex
-pdflatex $1.tex
 
 #remove temporary files
 rm $1.aux
