@@ -8,4 +8,4 @@ pdflatex $1.tex
 rm $1.aux
 rm $1.log
 
-gnome-open $1.pdf
+evince $1.pdf
