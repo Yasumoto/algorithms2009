@@ -31,8 +31,9 @@ public class FiniteStateAutomata{
 
 class Transition 
 {
-	ArrayList<String> Target = new ArrayList<String>();
+	public ArrayList<String> Target = new ArrayList<String>();
 	String Input;
+	// May need to be an arraylist?
 	String Home;
 
 	public void setTarget(ArrayList<String> Target)
