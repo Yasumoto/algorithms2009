@@ -7,6 +7,8 @@
  * Released under GPLv2 or later.
  */
 
+import java.util.*;
+
 public class FiniteStateAutomata{
 	// The second line of the file
 	public String[] Alphabet;
@@ -16,7 +18,7 @@ public class FiniteStateAutomata{
 	public String acceptState;
 
 	//5th to the end
-	public ArrayList transitions;
+	public ArrayList<Transition> transitions;
 
 	public FiniteStateAutomata()
 	{

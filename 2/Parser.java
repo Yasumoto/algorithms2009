@@ -8,6 +8,7 @@
  */
 
 import java.io.*;
+import java.util.*;
 
 public class Parser{
 	public Parser(String filename){
@@ -42,7 +43,12 @@ public class Parser{
 			{        
 				line = parseTransitionState(line);
 				System.out.println(line);
-				FSA.transitions.add(line);
+
+                                Transition tran = new Transition();
+
+				//tran = parseTrans(line);
+
+				//FSA.transitions.add(line);
 
 				line = in.readLine();
 			} 
@@ -96,7 +102,7 @@ public class Parser{
                 line = line.replace("{", "");
                 line = line.replace("}", "");
 
-		System.out.println(line);
+		//System.out.println(line);
 		return line;
 	}
 }
