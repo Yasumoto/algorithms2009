@@ -31,4 +31,11 @@ public class Parser{
 	 		e.printStackTrace();
  		}
 	}
+
+	private String[] parseStates(String line)
+	{
+		String[] StateList = ;
+		return StateList;
+	}
+
 }
