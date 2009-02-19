@@ -27,16 +27,16 @@ public class FiniteStateAutomata{
 
 class Transition 
 {
-	String Target;
+	ArrayList<String> Target = new ArrayList<String>();
 	String Input;
 	String Home;
 
-	public void setTarget(String Target)
+	public void setTarget(ArrayList<String> Target)
 	{
 		this.Target = Target;
 	}
 
-	public String getTarget()
+	public ArrayList<String> getTarget()
 	{
 		return this.Target;
 	}

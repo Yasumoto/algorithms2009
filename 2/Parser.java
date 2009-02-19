@@ -38,6 +38,8 @@ public class Parser{
 			line = in.readLine();
 			FSA.acceptState = parseAcceptState(line);
 
+			System.out.println("=======");
+
 			line = in.readLine();
 			while  (line != null) 
 			{        
@@ -45,6 +47,11 @@ public class Parser{
 				parseTransitionState(tran, line);
 
 				FSA.transitions.add(tran);
+
+				System.out.println(tran.getHome());
+				System.out.println(tran.getInput());
+
+				System.out.println(tran.Target);
 
 				line = in.readLine();
 			} 
@@ -95,16 +102,38 @@ public class Parser{
 
 	private Transition parseTransitionState(Transition tran, String line)
 	{
-
+		// Just get rid of these. I know they can be helpful for parsing, but whatevs.
                 line = line.replace("{", "");
                 line = line.replace("}", "");
 
 		tran.setHome(Character.toString(line.charAt(0)));
-		tran.setInput(Character.toString(line.charAt(2)));
+		// Take care of epsilon
+		if (line.charAt(2) == 'E')
+		{
+			tran.setInput("EPS");
+		}
+		else
+		{
+			tran.setInput(Character.toString(line.charAt(2)));
+		}
 
-		System.out.println(tran.getHome());
+		for (int i = 3; i > 2; ++i)
+		{
+			try
+			{
+				// Primitive parsing at its finest.
+				if (line.charAt(i) == ',')
+				{
+					tran.Target.add(Character.toString(line.charAt(i-1)));
+				}
+			} 
+			catch (StringIndexOutOfBoundsException e) 
+			{
+				tran.Target.add(Character.toString(line.charAt(i-1)));
+				break;
+			}
+		}
 
-		//System.out.println(line);
 		return tran;
 	}
 }
