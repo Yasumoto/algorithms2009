@@ -175,6 +175,12 @@
 \section {Closed Union}
 Prove that the class of regular languages is closed under the union ($\cup$) operation. (Hint: Use proof by construction.)
 
+A collection of objects is closed under an operation if applying the operation to members of the collection returns an object in the collection.
+
+Alright, I think I got this one. Take a regular language, $R_1$. Because it is regular, there is a Regular Expression, $r_1$, that describes it. Now take a second regular language, $R_2$, which also has a regular expression that describes it, $r_2$.
+
+Then the union of $R_1$ and $R_2$ is $L$. Language $L$ is described by the regex $r_1 \cup r_2$, which by definition of a regular expression is regular. Thus, since there is a regex that describes $L$, it is regular.
+
 \section{...now has two problems}
 Provide the regular expression that corresponds to each of the following language descriptions. Assume that $\Sigma$ is \{0, 1\}:
 
@@ -202,7 +208,7 @@ Convert the regular expression $(a \cup b)^*$ to a nondeterministic finite state
 
 \begin{figure}[htbp]
 \centerline{
-    \mbox{\includegraphics[width=3.0in]{algorithms2_3.pdf}}
+    \mbox{\includegraphics[width=1.5in]{algorithms2_3.pdf}}
   }
   \caption{$(a \cup b)^*$}
   \label{fig:fit}
