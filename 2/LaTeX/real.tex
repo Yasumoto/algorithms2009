@@ -198,7 +198,29 @@ Provide the regular expression that corresponds to each of the following languag
 \end{enumerate}
 
 \section{Regex to NFA}
-Convert the regular expression $(a \cup b)$ to a nondeterministic finite state automaton. Note that you do not have to draw the NFA if you do not wish to do so. You may provide the mathematical specification $M = (Q, \Sigma, \delta, q_0 , F )$. For $\delta$ you may provide a table of the transitions.
+Convert the regular expression $(a \cup b)^*$ to a nondeterministic finite state automaton. Note that you do not have to draw the NFA if you do not wish to do so. You may provide the mathematical specification $M = (Q, \Sigma, \delta, q_0 , F )$. For $\delta$ you may provide a table of the transitions.
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=3.5in]{algorithms2_3.pdf}}
+  }
+  \caption{T$(a \cup b)^*$}
+  \label{fig:fit}
+\end{figure}
+
+\hspace{0.5in} This seems almost deceptively simple, but it would appear that this is a rather simple Regex to model. $M = (Q, \Sigma, \delta, q_0 , F )$, where:
+
+\vspace{0.2in}
+$ Q = 1$
+
+$\Sigma = a,\ b$
+
+$\delta = \{1\}_a \rightarrow \{1\}, \{1\}_b \rightarrow \{1\}$
+
+$q_0 = 1$
+
+$F = 1$.
+\vspace{0.2in}
 
 \section{Pump it up}
 Using the pumping lemma prove that $F = \{ww|w\  \epsilon\  \{0, 1\}\ \}$ is nonregular.
