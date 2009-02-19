@@ -24,7 +24,7 @@ public class FiniteStateAutomata{
 	// The new stuff to be created:
 	public ArrayList<String> newStartState = new ArrayList<String>();
 
-	public ArrayList<ArrayList> builtStates = new ArrayList<ArrayList>();
+	public ArrayList<ArrayList<String>> builtStates = new ArrayList<ArrayList<String>>();
 
 	public FiniteStateAutomata()
 	{

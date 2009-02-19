@@ -48,9 +48,9 @@ public class Builder
 		return createdState;
 	}
 
-	private ArrayList<String> buildStates(FiniteStateAutomata FSA, ArrayList<String> state)
+	private ArrayList<ArrayList<String>> buildStates(FiniteStateAutomata FSA, ArrayList<String> state)
 	{
-		ArrayList<ArrayList> builtStates = new ArrayList<ArrayList>();
+		ArrayList<ArrayList <String> > builtStates = new ArrayList<ArrayList<String>>();
 
 		for (int i = 0; i < state.size(); ++i)
 		{
