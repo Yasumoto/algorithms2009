@@ -32,7 +32,7 @@ public class Parser{
 			FSA.Alphabet = parseAlphabet(line);
 				
 			line = in.readLine();
-			FSA.startState = parseStartState(line);
+			FSA.startState.add(parseStartState(line));
 
 			line = in.readLine();
 			FSA.acceptState = parseAcceptState(line);

@@ -13,7 +13,7 @@ public class FiniteStateAutomata{
 	// The second line of the file
 	public String[] Alphabet;
 	// 3rd
-	public String startState;
+	public ArrayList<String> startState = new ArrayList<String>();
 	// 4th
 	public String acceptState;
 
@@ -23,6 +23,8 @@ public class FiniteStateAutomata{
 
 	// The new stuff to be created:
 	public ArrayList<String> newStartState = new ArrayList<String>();
+
+	public ArrayList<ArrayList> builtStates = new ArrayList<ArrayList>();
 
 	public FiniteStateAutomata()
 	{
