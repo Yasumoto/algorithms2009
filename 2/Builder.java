@@ -8,6 +8,7 @@
  */
 
 import java.util.*;
+import java.lang.Number;
 
 public class Builder 
 {
@@ -18,18 +19,21 @@ public class Builder
 		FSA.newStartState = createEpsilon(FSA, FSA.startState);
 
 		System.out.println("========");
-		System.out.println(FSA.startState);
+		System.out.println(FSA.newStartState);
 	}
 
 	private ArrayList<String> createEpsilon(FiniteStateAutomata FSA, String state)
 	{
 		ArrayList<String> createdState = new ArrayList<String>();
 
+		createdState.add(state);
+
 		for (int i = 0; i < FSA.transitions.size(); ++i)
-		{
-			if (FSA.transitions.get(i).Home == state)
-			{
-				createdState.addAll(FSA.transitions.get(i).Target);
+		{            
+			if (Integer.parseInt(FSA.transitions.get(i).Home) == Integer.parseInt(state))
+			{                            
+				if (FSA.transitions.get(i).Input == "EPS")
+					createdState.addAll(FSA.transitions.get(i).Target);
 			}
 		}
 
