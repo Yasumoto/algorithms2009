@@ -6,4 +6,4 @@ all:
 	javac -d $(CLASSDIR) $(SOURCES)
 
 clean:
-	rm $(CLASSDIR)/*.class
+	rm -f $(CLASSDIR)/*.class

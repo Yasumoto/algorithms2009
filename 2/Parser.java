@@ -13,7 +13,6 @@ public class Parser{
 	public Parser(String filename){
 		BufferedReader in;
 		String line = "";
-
 		try 
 		{
 			in = new BufferedReader(new FileReader(filename));
