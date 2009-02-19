@@ -229,7 +229,17 @@ $F = 1$.
 \vspace{0.2in}
 
 \section{Pump it up}
-Using the pumping lemma prove that $F = \{ww|w\  \epsilon\  \{0, 1\}\ \}$ is nonregular.
+Using the pumping lemma prove that $F = \{ww|w\ \in\ \{0, 1\}\ \}$ is nonregular.
+
+To prove $F$ is nonregular, let's assume it is regular, with pumping length $P$.
+
+There must exist a string:
+
+\hspace{0.3in}$S = x y z$ for $i \geq 0$ such that $x$ is a $w$ and $y$ is a $w$.
+
+Then say $P$ is two. If you pump $y$, you will get:
+
+\hspace{0.3in}$xyyy$, where those equal $wwww$, which is no longer part of the language.
 
 
 
