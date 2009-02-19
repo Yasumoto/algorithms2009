@@ -18,6 +18,6 @@
 
 public class Determine{
 	public static void main(String[] args){
-		Parser parse = new Parser(args[1]);
+		Parser parse = new Parser(args[0]);
 	}
 }
