@@ -17,7 +17,8 @@
  */
 
 public class Determine{
-	public static void main(String[] args){
+	public static void main(String[] args)
+	{
 		Parser parse = new Parser(args[0]);
 	}
 }

@@ -8,7 +8,15 @@
  */
 
 public class FiniteStateAutomata{
+	// The second line of the file
 	public String[] Alphabet;
+	// 3rd
+	public String startState;
+	// 4th
+	public String acceptState;
+
+	//5th to the end
+	public ArrayList transitions;
 
 	public FiniteStateAutomata()
 	{
