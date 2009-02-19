@@ -175,17 +175,25 @@
 \section {Closed Union}
 Prove that the class of regular languages is closed under the union ($\cup$) operation. (Hint: Use proof by construction.)
 
-\section{Large and In Charge}
+\section{...now has two problems}
 Provide the regular expression that corresponds to each of the following language descriptions. Assume that $\Sigma$ is \{0, 1\}:
 
 \begin{enumerate}
 \item \{$w|w$ has exactly a single 1\}
 
+\hspace{0.5in} $0^*\ \cdot\ \{1\}\ \cdot\ 0^*$
+
 \item \{$w|w$ contains the string 001 as a substring\}
+
+\hspace{0.5in} $\Sigma^*\ \cdot\ \{001\}\ \cdot\ \Sigma^*$
 
 \item \{$w|w$ is a string of even length\}
 
+\hspace{0.5in} $ (\{0,1\} \cdot \{0,1\})^*$
+
 \item \{$w|w$ starts and ends with the same symbol\}
+
+\hspace{0.5in} $  $
 
 \end{enumerate}
 
