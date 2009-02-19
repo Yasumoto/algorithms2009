@@ -8,6 +8,8 @@
  */
 
 public class FiniteStateAutomata{
+	public String[] Alphabet;
+
 	public FiniteStateAutomata()
 	{
 	}

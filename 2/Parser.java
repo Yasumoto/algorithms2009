@@ -13,12 +13,26 @@ public class Parser{
 	public Parser(String filename){
 		BufferedReader in;
 		String line = "";
+		FiniteStateAutomata FSA = new FiniteStateAutomata();
+
 		try 
 		{
 			in = new BufferedReader(new FileReader(filename));
+
+			/*
+			 * This algorithm (hopefully) doesn't need the list of states
+			 */
+
+			line = in.readLine();
+
+                        /*
+			 * To find the characters
+			 */
+			line = in.readLine();
+			FSA.Alphabet = parseAlphabet(line);
+
 			while (line != null)
 			{
-				line = in.readLine();
 				System.out.println(line);
 			}
 		}
@@ -32,10 +46,19 @@ public class Parser{
  		}
 	}
 
-	private String[] parseStates(String line)
+	private String[] parseAlphabet(String line)
 	{
-		String[] StateList = ;
-		return StateList;
+		String[] alpha = {};
+		line = line.replace('{', ' ');
+		line = line.replace('}', ' ');
+                alpha = line.split("\t");
+
+		for (int i = 0; i < alpha.length; ++i)
+		{
+			System.out.println(alpha[i]);
+		}
+
+		return alpha;
 	}
 
 }
