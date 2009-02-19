@@ -18,7 +18,7 @@ public class FiniteStateAutomata{
 	public String acceptState;
 
 	//5th to the end
-	public ArrayList<Transition> transitions;
+	public ArrayList<Transition> transitions = new ArrayList<Transition>();
 
 	public FiniteStateAutomata()
 	{

@@ -41,14 +41,10 @@ public class Parser{
 			line = in.readLine();
 			while  (line != null) 
 			{        
-				line = parseTransitionState(line);
-				System.out.println(line);
+				Transition tran = new Transition();
+				parseTransitionState(tran, line);
 
-                                Transition tran = new Transition();
-
-				//tran = parseTrans(line);
-
-				//FSA.transitions.add(line);
+				FSA.transitions.add(tran);
 
 				line = in.readLine();
 			} 
@@ -97,12 +93,18 @@ public class Parser{
 		return line;
 	}
 
-	private String parseTransitionState(String line)
+	private Transition parseTransitionState(Transition tran, String line)
 	{
+
                 line = line.replace("{", "");
                 line = line.replace("}", "");
 
+		tran.setHome(Character.toString(line.charAt(0)));
+		tran.setInput(Character.toString(line.charAt(2)));
+
+		System.out.println(tran.getHome());
+
 		//System.out.println(line);
-		return line;
+		return tran;
 	}
 }
