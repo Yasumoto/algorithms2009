@@ -19,6 +19,10 @@
 public class Determine{
 	public static void main(String[] args)
 	{
-		Parser parse = new Parser(args[0]);
+                FiniteStateAutomata FSA = new FiniteStateAutomata();
+
+		Parser parse = new Parser(args[0], FSA);
+
+		Builder build = new Builder(FSA);
 	}
 }

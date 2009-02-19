@@ -11,10 +11,9 @@ import java.io.*;
 import java.util.*;
 
 public class Parser{
-	public Parser(String filename){
+	public Parser(String filename, FiniteStateAutomata FSA){
 		BufferedReader in;
 		String line = "";
-		FiniteStateAutomata FSA = new FiniteStateAutomata();
 
 		try 
 		{
@@ -124,11 +123,14 @@ public class Parser{
 				// Primitive parsing at its finest.
 				if (line.charAt(i) == ',')
 				{
+					// Catch any numbers before a comma
+					// (for multiple targets)
 					tran.Target.add(Character.toString(line.charAt(i-1)));
 				}
 			} 
 			catch (StringIndexOutOfBoundsException e) 
 			{
+				// Reached the end, grab the target.
 				tran.Target.add(Character.toString(line.charAt(i-1)));
 				break;
 			}

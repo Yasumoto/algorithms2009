@@ -20,6 +20,10 @@ public class FiniteStateAutomata{
 	//5th to the end
 	public ArrayList<Transition> transitions = new ArrayList<Transition>();
 
+
+	// The new stuff to be created:
+	public ArrayList<String> newStartState = new ArrayList<String>();
+
 	public FiniteStateAutomata()
 	{
 	}
