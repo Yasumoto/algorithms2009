@@ -12,16 +12,19 @@ import java.lang.Number;
 
 public class Builder 
 {
+        FiniteStateAutomata NFA = new FiniteStateAutomata();
+
 	public Builder(FiniteStateAutomata FSA)
 	{
 		//Find new initial state
 		// (the epsilon closure)
-		FSA.newStartState = createEpsilon(FSA, FSA.startState);
+		NFA = FSA;
+		NFA.startState = createEpsilon(FSA, FSA.startState);
 
 		System.out.println("========");
-		System.out.println(FSA.newStartState);
+		System.out.println(NFA.startState);
 
-		FSA.builtStates = buildStates(FSA, FSA.newStartState);
+		FSA.builtStates = buildStates(FSA, NFA.startState);
 
 		System.out.println("&&&&&&&&&&&&");
 		System.out.println(FSA.builtStates);
@@ -29,6 +32,10 @@ public class Builder
 
 	private ArrayList<String> createEpsilon(FiniteStateAutomata FSA, ArrayList<String> state)
 	{
+		if (state == null)
+		{
+			return null;
+		}
 		ArrayList<String> createdState = new ArrayList<String>();
 
 		createdState.addAll(state);
@@ -44,18 +51,24 @@ public class Builder
 				}
 			}
 		}
-
+		System.out.println("()()()()()()()()()()()");
+		System.out.println(createdState);
+		System.out.println("()()()()()()()()()()()");
 		return createdState;
 	}
 
 	private ArrayList<ArrayList<String>> buildStates(FiniteStateAutomata FSA, ArrayList<String> state)
 	{
+		if (state == null)
+		{
+			return null;
+		}
 		ArrayList<ArrayList <String> > builtStates = new ArrayList<ArrayList<String>>();
 
-		for (int i = 0; i < state.size(); ++i)
+		for (int i = 0; i < FSA.states.length; ++i)
 		{
 			//System.out.println("States: " + state.get(i) + "\n");
-			for (int j = 0; j < FSA.Alphabet.length; ++j)
+			for (int j = 0; j < NFA.Alphabet.length; ++j)
 			{
 				//System.out.println("Alphabet: " + FSA.Alphabet[j] + "\n");
 				for (int k = 0; k < FSA.transitions.size(); ++k)
@@ -64,17 +77,23 @@ public class Builder
 					//System.out.println(state.get(i));
 					//System.out.println(FSA.transitions.get(k).Home);
 					//System.out.println("transitions: " + FSA.transitions.get(k).Home + "\n");
-					if (state.get(i).equals(FSA.transitions.get(k).Home))
+					//if (state.get(i).equals(FSA.transitions.get(k).Home))
+					if (FSA.states[i].equals(FSA.transitions.get(k).Home))
 					{
                                                         //System.out.println(FSA.Alphabet[j]);
 							//System.out.println(FSA.transitions.get(k).Input);
 						if (FSA.Alphabet[j].equals(FSA.transitions.get(k).Input))
 						{
+							System.out.println("++++++++++++");
+							System.out.println(FSA.transitions.get(k).Target);
+							System.out.println("++++++++++++");
+							builtStates.add(FSA.transitions.get(k).Target);
 							builtStates.add(createEpsilon(FSA, FSA.transitions.get(k).Target));
 						}
 					}
 				}
 			}
+			System.out.println("WHOOO! " + i);
 		}
 
 			//System.out.println(state.get(i));

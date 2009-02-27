@@ -24,6 +24,7 @@ public class Parser{
 			 */
 
 			line = in.readLine();
+			FSA.states = parseTotalStates(line);
 
                         /*
 			 * To find the characters
@@ -89,6 +90,21 @@ public class Parser{
 		return line;
 	}
 
+	private String[] parseTotalStates(String line)
+	{
+                String[] line2 = line.split("}");
+
+		System.out.println("The total states: ");
+		for (int i = 0; i < line2.length; ++i)
+		{
+			line2[i] = line2[i].trim();
+			//line2[i] = (line2[i]).split("{");
+			line2[i] = String.valueOf(line2[i].charAt(1));
+			//System.out.println(line2[i]);
+		}
+		return line2;
+	}
+
 	private String parseAcceptState(String line)
 	{
                 line = line.replace("{", "");
@@ -107,16 +123,16 @@ public class Parser{
 
 		tran.setHome(Character.toString(line.charAt(0)));
 		// Take care of epsilon
-		if (line.charAt(2) == 'E')
+		if (line.charAt(3) == 'E')
 		{
 			tran.setInput("EPS");
 		}
 		else
 		{
-			tran.setInput(Character.toString(line.charAt(2)));
+			tran.setInput(Character.toString(line.charAt(3)));
 		}
 
-		for (int i = 3; i > 2; ++i)
+		for (int i = 4; i > 2; ++i)
 		{
 			try
 			{

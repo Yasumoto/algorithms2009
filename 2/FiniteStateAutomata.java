@@ -10,6 +10,9 @@
 import java.util.*;
 
 public class FiniteStateAutomata{
+	//First
+	public String[] states;
+
 	// The second line of the file
 	public String[] Alphabet;
 	// 3rd
