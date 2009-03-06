@@ -10,6 +10,11 @@
 import java.io.*;
 import java.util.*;
 
+/*
+ * The parser that is used to read through the input file
+ * and extract the NDA info.
+ */
+
 public class Parser{
 	public Parser(String filename, FiniteStateAutomata FSA){
 		BufferedReader in;
@@ -32,14 +37,24 @@ public class Parser{
 			line = in.readLine();
 			FSA.Alphabet = parseAlphabet(line);
 				
+			/*
+			 * Find the start state
+			 */
 			line = in.readLine();
 			FSA.startState.add(parseStartState(line));
 
+			/*
+			 * Grab all accept states
+			 */
 			line = in.readLine();
 			FSA.acceptState = parseAcceptState(line);
 
 			System.out.println("=======");
 
+			/*
+			 * This loop will collect all transitions
+			 * in the transition function
+			 */
 			line = in.readLine();
 			while  (line != null) 
 			{        
@@ -48,10 +63,12 @@ public class Parser{
 
 				FSA.transitions.add(tran);
 
+				/*
 				System.out.println(tran.getHome());
 				System.out.println(tran.getInput());
 
 				System.out.println(tran.Target);
+				*/
 
 				line = in.readLine();
 			} 
@@ -66,6 +83,9 @@ public class Parser{
  		}
 	}
 
+	/*
+	 * Grab the alphabet
+	 */
 	private String[] parseAlphabet(String line)
 	{
 		String[] alpha = {};

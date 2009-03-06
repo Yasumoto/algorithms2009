@@ -12,21 +12,22 @@ import java.lang.Number;
 
 public class Builder 
 {
-        FiniteStateAutomata NFA = new FiniteStateAutomata();
+        FiniteStateAutomata DFA = new FiniteStateAutomata();
 
 	public Builder(FiniteStateAutomata FSA)
 	{
+		DFA = FSA;
+		
 		//Find new initial state
 		// (the epsilon closure)
-		NFA = FSA;
-		NFA.startState = createEpsilon(FSA, FSA.startState);
+		DFA.startState = createEpsilon(FSA, FSA.startState);
 
-		System.out.println("========");
-		System.out.println(NFA.startState);
+		System.out.println("The DFA's start state:");
+		System.out.println(DFA.startState);
 
-		FSA.builtStates = buildStates(FSA, NFA.startState);
+		FSA.builtStates = buildStates(FSA, DFA.startState);
 
-		System.out.println("&&&&&&&&&&&&");
+		System.out.println("The DFA's states:");
 		System.out.println(FSA.builtStates);
 	}
 
@@ -51,9 +52,11 @@ public class Builder
 				}
 			}
 		}
+		/*
 		System.out.println("()()()()()()()()()()()");
 		System.out.println(createdState);
 		System.out.println("()()()()()()()()()()()");
+		*/
 		return createdState;
 	}
 
@@ -68,7 +71,7 @@ public class Builder
 		for (int i = 0; i < FSA.states.length; ++i)
 		{
 			//System.out.println("States: " + state.get(i) + "\n");
-			for (int j = 0; j < NFA.Alphabet.length; ++j)
+			for (int j = 0; j < DFA.Alphabet.length; ++j)
 			{
 				//System.out.println("Alphabet: " + FSA.Alphabet[j] + "\n");
 				for (int k = 0; k < FSA.transitions.size(); ++k)
@@ -84,16 +87,18 @@ public class Builder
 							//System.out.println(FSA.transitions.get(k).Input);
 						if (FSA.Alphabet[j].equals(FSA.transitions.get(k).Input))
 						{
-							System.out.println("++++++++++++");
-							System.out.println(FSA.transitions.get(k).Target);
-							System.out.println("++++++++++++");
+							/*
+							 * Hopefully after all of this, we have the proper states we need
+							 */
+							//System.out.println("++++++++++++");
+							//System.out.println(FSA.transitions.get(k).Target);
+							//System.out.println("++++++++++++");
 							builtStates.add(FSA.transitions.get(k).Target);
 							builtStates.add(createEpsilon(FSA, FSA.transitions.get(k).Target));
 						}
 					}
 				}
 			}
-			System.out.println("WHOOO! " + i);
 		}
 
 			//System.out.println(state.get(i));

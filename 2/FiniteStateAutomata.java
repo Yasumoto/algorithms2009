@@ -11,6 +11,7 @@ import java.util.*;
 
 public class FiniteStateAutomata{
 	//First
+	// The list of states that are possible in the NFA
 	public String[] states;
 
 	// The second line of the file

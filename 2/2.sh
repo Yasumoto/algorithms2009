@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make clean && make && cd ./cls && java Determine ../NFA2
+make clean && make && cd ./cls && java Determine ../NFA3

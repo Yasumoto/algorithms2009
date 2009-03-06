@@ -16,6 +16,10 @@
  * Print out DFA
  */
 
+/*
+ * The awkwardly simple main class
+ */
+
 public class Determine{
 	public static void main(String[] args)
 	{
