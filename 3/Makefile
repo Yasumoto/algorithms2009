@@ -4,4 +4,4 @@ CC=pdflatex
 all:
 	$(CC) *.tex
 clean:
-	rm *.aux *.log joeSmith_3.pdf
+	rm -f *.aux *.log joeSmith_3.pdf
