@@ -177,14 +177,14 @@ In the vertex covering problem we are given a graph $G$ consisting of a set of v
 \\
 Prove that vertex cover is NP complete by showing 3-SAT is poly nomial time reducible to it.
 \subsection{Answer}
-Given a problem of 3-SAT, with clauses $C_1, C_2, ..., C_n$ and boolean variables $x_1, x_2, ...\ , x_n$, we can reduce it to a problem of vertex cover. For each clause, $C_x$, it contains three boolean variables, $x_a, x_b, x_c$. Make each variable a node in a graph, and create edges between all three nodes. For each variable present in the equation, $x_1, x_2, ...\ , x_n$, place a node for that variable as well as its disjunction. Connect each of these nodes with its disjunction, such that the $x_1$ node is connected to each $\bar{x_1}$ present in a clause, and the $\bar{x_1}$ node is connected to each $x_1$ node in each clause.
+Given a problem of 3-SAT, with clauses $C_1, C_2, ..., C_n$ and boolean variables $x_1, x_2, ...\ , x_n$, we can reduce it to a problem of vertex cover. For each clause, $C_x$, it contains three boolean variables, $x_a, x_b, x_c$. Make each variable a node in a graph, and create edges between all three nodes. For each variable present in the equation, $x_1, x_2, ...\ , x_n$, place a node for that variable as well as its disjunction. Connect each of these nodes with its disjunction, such that the $x_1$ node is connected to each $\bar{x_1}$ present in a clause, and the $\bar{x_1}$ node is connected to each $x_1$ node in each clause. Thus, each clause that is true will have its variables true, and the nodes will be included in the subgraph for vertex cover.
 \\
 
 
 \section {Monotone Satisfiability}
 Given a monotone instance of Satisfiability, together with a number $k$, the problem of \textit{Monotone Satisfiability with Few True Variables} asks: Is there a satisfying assignment for the instance in which at most $k$ variables are set to 1? Prove this problem is NP-complete.
 \subsection{Answer}
-In order to show this problem is NP-Complete, we will reduce vertex cover to this problem. A graph can be converted to Monotone Satisfiability if there is a graph such that each clause is an edge.
+In order to show this problem is NP-Complete, we will reduce vertex cover to this problem. A graph can be converted to Monotone Satisfiability if there is a graph such that each clause is an edge. This edge will be composed of two nodes, each of which will be variables featured in a clause. Vertex cover states that each edge in the graph will have a connected vertex in the subgraph. As such, if a variable is considered true in Monotone Satisfiability, then it will be included in the subgraph, and will satisfy vertex cover.
 
 
 
