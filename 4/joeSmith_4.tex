@@ -1,0 +1,276 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   TEMPLATE MAIN FILE                       %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt,reqno,sumlimits]{amsart}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{url}
+%\textwidth 6.2in
+%\oddsidemargin.20in
+%\evensidemargin.35in
+%%\lineskip 1in
+%%\baselineskip.55cm
+
+% Read in specially defined commands
+% Change margins and baselinestretch in draft mode
+\def\draft{
+% make margins smaller
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.65in}
+\addtolength{\textheight}{1in}
+\addtolength{\textwidth}{1.5in}
+% A more reasonable baselinestretch, is still nearly doublespaced.
+\def\baselinestretch{1.4}
+}
+
+%\vfuzz2pt % Don't report over-full v-boxes if over-edge is small
+%\hfuzz2pt % Don't report over-full h-boxes if over-edge is small
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%              Theorems                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{notation}{Notation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%      Definitions and Commands                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\A}{{\mathbb A}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\D}{{\mathbb D}}
+\newcommand{\Z}{{\mathbb Z}}
+\newcommand{\h}{{\mathbb H}}
+\newcommand{\CP}{{\mathbb C}{\mathbb P}}
+\newcommand{\I}{{\mathbb I}}
+\newcommand{\N}{{\mathbb N}}
+%
+\newcommand{\calA}{{\mathcal A}}
+\newcommand{\calB}{{\mathcal B}}
+\newcommand{\calC}{{\mathcal C}}
+\newcommand{\calD}{{\mathcal D}}
+\newcommand{\calE}{{\mathcal E}}
+\newcommand{\calF}{{\mathcal F}}
+\newcommand{\calG}{{\mathcal G}}
+\newcommand{\calH}{{\mathcal H}}
+\newcommand{\calI}{{\mathcal I}}
+\newcommand{\calK}{{\mathcal K}}
+\newcommand{\calM}{{\mathcal M}}
+\newcommand{\calO}{{\mathcal O}}
+\newcommand{\calP}{{\mathcal P}}
+\newcommand{\calR}{{\mathcal R}}
+\newcommand{\calS}{{\mathcal S}}
+\newcommand{\calL}{{\mathcal L}}
+\newcommand{\calX}{{\mathcal X}}
+\newcommand{\calU}{{\mathcal U}}
+\newcommand{\calV}{{\mathcal V}}
+\newcommand{\calZ}{{\mathcal Z}}
+%
+\newcommand{\ggoth}{{\mathfrak  g}}
+\newcommand{\ugoth}{{\mathfrak  u}}
+\newcommand{\hgoth}{{\mathfrak  h}}
+%%
+\newcommand{\1}{{\bf 1}}
+\newcommand{\acts}{{\circlearrowright}}
+\newcommand{\ex}[1]{{e^{#1}}}
+\newcommand{\dd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\iso}{\stackrel{\simeq}{\longrightarrow}}
+\newcommand{\spinc}{$\text{spin}^c$}
+\newcommand{\Dirac}{\not\!\!D}
+\newcommand{\inc}{\hookrightarrow}
+%%
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Hor}{\operatorname{Hor}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Map}{\operatorname{Map}}
+\newcommand{\Diff}{\operatorname{Diff}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\Lie}{\operatorname{Lie}}
+\newcommand{\ad}{{\operatorname{ad\,}}}
+\newcommand{\sign}{{\operatorname{sign}}}
+\newcommand{\grad}{{\operatorname{grad}}}
+\newcommand{\coker}{{\operatorname{coker}}}
+\newcommand{\dett}{{\operatorname{det}}}
+\newcommand{\ch}{{\operatorname{ch}}}
+\newcommand{\rk}{{\operatorname{rk}}}
+\newcommand{\maxx}{{\operatorname{max}}}
+\newcommand{\minn}{{\operatorname{min}}}
+\newcommand{\id}{{\operatorname{id}}}
+\newcommand{\ind}{{\operatorname{ind}}}
+\newcommand{\Ind}{{\operatorname{Ind}}}
+\newcommand{\spann}{{\operatorname{span}}}
+\newcommand{\Spin}{{\operatorname{Spin}}}
+\newcommand{\Pin}{{\operatorname{Pin}}}
+\newcommand{\im}{{\operatorname{Im}}}
+\renewcommand{\Im}{{\operatorname{Im}}}
+\newcommand{\dimm}{{\operatorname{dim}}}
+\newcommand{\cl}{{\operatorname{cl}}}
+%%
+\newcommand{\tM}{{\tilde{M}}}
+\newcommand{\tC}{{\tilde{C}}}
+\newcommand{\tE}{{\tilde{E}}}
+\newcommand{\tF}{{\tilde{F}}}
+\newcommand{\talpha}{{\tilde{\alpha}}}
+%%
+\newcommand{\zbar}{\overline{z}}
+\newcommand{\wbar}{\overline{w}}
+\newcommand{\phibar}{\overline{\phi}}
+\newcommand{\psibar}{\overline{\psi}}
+\newcommand{\Bbar}{\overline{B}}
+\newcommand{\Cbar}{\overline{C}}
+\newcommand{\inv}{^{-1}}
+%%      
+\newcommand{\rb}[1]{\raisebox{0pt}[0pt][0pt]{#1}}
+\newsavebox{\savepar}
+\newenvironment{boxit}{\begin{lrbox}{\savepar}\begin{minipage}[b]{.5in}}
+{\end{minipage}\end{lrbox}\fbox{\usebox{\savepar}}}
+%%\newcommand{\ip}[1]{\langle\! #1 \! \rangle}
+\newcommand{\ip}[1]{\langle #1 \rangle}
+\newcommand{\norm}[1]{\| #1 \|}
+%
+%\newcommand{\remark}{{\tt ?}\marginpar{\Large\centering ?}}
+\newcommand{\rremark}{\marginpar{\Large\centering ?}}
+\newcommand{\Remark}[1]{\textsc{\tiny{[#1]}}\rremark}
+\newcommand{\todo}{\textsc{Todo!}\marginpar{\Large\centering !}}
+%
+\numberwithin{equation}{section}
+\renewcommand{\theequation}{{\thesection{.}}\arabic{equation}}
+\newcounter{dummy}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title[Assignment 4]{Completely NP}
+\author{Joe Smith}
+
+
+%\begin{abstract}
+%The abstract
+%\end{abstract}
+
+\maketitle
+
+%\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section {Parse Trees}
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[height=1.5in]{figures/3_1_a.pdf}}
+  }
+  \caption{$a$}
+  \label{fig:fit}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=1.5in]{figures/3_1_b.pdf}}
+  }
+  \caption{$a + a$}
+  \label{fig:fit}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=1.5in]{figures/3_1_c.pdf}}
+  }
+  \caption{$a + a + a$}
+  \label{fig:fit}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=1.5in]{figures/3_1_d.pdf}}
+  }
+  \caption{$((a))$}
+  \label{fig:fit}
+\end{figure}
+
+\section {Creating Fine Greatness (CFG)}
+\hspace{0.2in}$\Sigma = \{0,1\}$
+\begin{enumerate}
+\item \{$w|w$ contains at least three 1s\}
+
+\hspace{0.3in}$S\rightarrow\ T\ T\ T$
+
+\hspace{0.3in}$T\rightarrow\ U1U$
+
+\hspace{0.3in}$U\rightarrow\ \Sigma\ |\ U\Sigma\ |\ \Sigma U$
+
+\item \{$w|w$ starts and ends with the same symbol\}
+
+\hspace{0.3in}$S\rightarrow\ 0T0 | 1T1$
+
+\hspace{0.3in}$T\rightarrow\ \Sigma T | T\Sigma | \Sigma$
+
+\item \{$w|w$ contains more 1s than 0s\}
+
+\hspace{0.3in}$S\rightarrow\ 1 | 0S1 | 1S0 | SS$
+%\hspace{0.3in}$S\rightarrow\ 1 | SS | ST | TS$
+
+%\hspace{0.3in}$T\rightarrow\ 0T1 | 1T0 | TT | \epsilon$
+
+\end{enumerate}
+
+\section {Public Display of Aff--... Push Down Automata}
+
+\begin{figure}[htbp]
+\centerline{
+    \mbox{\includegraphics[width=2in]{figures/3_3.pdf}}
+  }
+  \caption{$\{ww^r |w \in \{0, 1\}^∗ \}$}
+  \label{fig:fit}
+\end{figure}
+
+\section {CFLs closed under Union}
+A context free language, or CFL is described with a context free grammar, CFG. A CFG is a 4-tuple, $(V, \Sigma, R, S)$ where:
+
+\hspace{0.5in}$V$ is a finite set of variables
+
+\hspace{0.5in}$\Sigma$ is a finite set of terminals, disjoint from $V$
+
+\hspace{0.5in}$R$ is a finite set of rules
+
+\hspace{0.5in}$S \in V$ is the start variable
+
+\hspace{0.3in}If there is a context free language, CFL$_1$, then there is a grammar, CFG$_1$, that describes it. Take another context free language, CFL$_2$, and note its grammar, CFG$_2$. Both have a finite set of rules, $R$, which describe their particular language. Then in order to take the union of CFL$_1$ and CFL$_2$, one must create CFL$_3$, which has as it's grammar:
+
+\hspace{0.5in} CFG$_3$ $\rightarrow$ CFG$_1 \ |\ $ CFG$_2$
+
+\hspace{0.3in} followed by the grammar found in CFG$_1$ and CFG$_2$. This will give a grammar that describes the language that is the union of the two. Since this language is described by a context free grammar, it is a context free language, showing that the class of context free languages is closed under the $\cup$ operation.
+
+
+\section {I spent all night Pumping}
+For the language $B = \{a^nb^nc^n|n\ \geq 0\}$, set $n\ =\ 2$, and take the string $aabbcc$. Thus, we should be able to divide the string into 5 pieces, such that $s\ =\ uvxyz$. Set $u\ =\ aa, v\ =\ b, x\ =\ b, y\ =\ c, z\ =\ c$. Then pump $v$ and $y$, in this case we'll say 3 times. This creates the string $aabbbbbccccc$. Since the language $B$ is such that there should be an even number of $a$, $b$, and $c$, this imbalance is no longer in the language, showing that it cannot be pumped, and $B$ is not a context free language.
+
+It's important to note that because we are pumping only two characters in the language, that will always throw imbalance into the system, as there will be $a^{n+x}b^{n+y}c^{n+z}$, where $x$, $y$, and $z$ are not all equivalent.
+
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End: 
+

@@ -1,0 +1,3 @@
+we can make 3sat into vertex cover:
+                                                             _
+we make each clause a triangle, then add the alphabet (a and a) 
