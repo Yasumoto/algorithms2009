@@ -1,0 +1,7 @@
+./cls/*
+*.swp
+*.aux
+*.pdf
+*.log
+*.class
+*.o
