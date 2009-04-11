@@ -13,4 +13,4 @@ search:	$(objects)
 search.o: search.h
 
 clean:
-	rm -f search *.o
+	rm -f search $(objects)
