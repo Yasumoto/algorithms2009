@@ -12,6 +12,18 @@
 
 #include "search.h"
 
+
+char** build_environment(int size)
+{
+	int i;
+	char **space = (char **)malloc(size * sizeof(char *));
+
+	for(i = 0; i < size; i++)
+		space[i] = (char *)malloc(size * sizeof(char));
+
+	return space;
+}
+
 int main(int argc, char** argv)
 {
 	FILE *fp;
@@ -28,9 +40,26 @@ int main(int argc, char** argv)
 		printf("Error, no file found.\n");
 		exit(1);
 	}
+	
+	int size = (int) fgetc(fp);
+	fgetc(fp);
 
+
+	char **space = build_environment(size);
+
+	
+	int i = 0, j = 0;
         while( (letter = fgetc(fp) ) != EOF)
-		printf("%c", letter);
+	{
+		if (letter == '\n')
+			printf("\n");
+		else
+		{
+			space[i][j] = letter;
+			printf("%c", space[i][j]);
+			++i; ++j;
+		}
+	}
 	
 	fclose(fp);
 
