@@ -24,6 +24,14 @@ char** build_environment(int size)
 	return space;
 }
 
+//E((i,j),(i',j')) = sqrt[(i-i')^2+(j-j')^2])
+float euclidean_distance(int current_x, int current_y, int goal_x, int goal_y)
+{
+	return sqrt( (float)(current_x - goal_x)*(float)(current_x - goal_x) +
+			(float)(current_y - goal_y)*(float)(current_y - goal_y) );
+}
+	
+
 int main(int argc, char** argv)
 {
 	FILE *fp;
