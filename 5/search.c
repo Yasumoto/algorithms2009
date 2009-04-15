@@ -43,6 +43,8 @@ int main(int argc, char** argv)
 	FILE *fp;
 	char letter;
 
+	int current_x, current_y, goal_x, goal_y;
+
 	if (argc == 1)
 	{
 		printf("Please enter a name as an argument.\n");
@@ -66,15 +68,35 @@ int main(int argc, char** argv)
         while( (letter = fgetc(fp) ) != EOF)
 	{
 		if (letter == '\n')
+		{
+			++j;
+			i = 0;
 			printf("\n");
+		}
+
 		else
 		{
+			if(letter == 'i')
+			{
+				current_x = i;
+				current_y = j;
+			}
+
+			if(letter == 'g')
+			{
+				goal_x = i;
+				goal_y = j;
+			}
+
 			space[i][j] = letter;
 			printf("%c", space[i][j]);
-			++i; ++j;
+			++i;
 		}
 	}
-	
+
+	printf("current_x = %d", current_x);
+	printf("current_y = %d", current_y);
+
 	fclose(fp);
 
 	return 0;
