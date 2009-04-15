@@ -30,6 +30,12 @@ float euclidean_distance(int current_x, int current_y, int goal_x, int goal_y)
 	return sqrt( (float)(current_x - goal_x)*(float)(current_x - goal_x) +
 			(float)(current_y - goal_y)*(float)(current_y - goal_y) );
 }
+
+//M((i,j),(i',j')) = |i-i'| + |j-j'|)
+int manhattan_distance(int current_x, int current_y, int goal_x, int goal_y)
+{
+	return abs(current_x - goal_x) + abs(current_y - goal_y);
+}
 	
 
 int main(int argc, char** argv)
