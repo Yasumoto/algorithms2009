@@ -25,25 +25,27 @@ char** build_environment(int size)
 }
 
 //E((i,j),(i',j')) = sqrt[(i-i')^2+(j-j')^2])
-float euclidean_distance(int current_x, int current_y, int goal_x, int goal_y)
+float euclidean_distance()
 {
 	return sqrt( (float)(current_x - goal_x)*(float)(current_x - goal_x) +
 			(float)(current_y - goal_y)*(float)(current_y - goal_y) );
 }
 
 //M((i,j),(i',j')) = |i-i'| + |j-j'|)
-int manhattan_distance(int current_x, int current_y, int goal_x, int goal_y)
+int manhattan_distance()
 {
 	return abs(current_x - goal_x) + abs(current_y - goal_y);
 }
-	
 
+void find_next()
+{
+}
+	
 int main(int argc, char** argv)
 {
 	FILE *fp;
 	char letter;
 
-	int current_x, current_y, goal_x, goal_y;
 
 	if (argc == 1)
 	{
@@ -96,6 +98,11 @@ int main(int argc, char** argv)
 
 	printf("current_x = %d", current_x);
 	printf("current_y = %d", current_y);
+
+	while (current_x != goal_x && current_y != goal_y)
+	{
+                find_next();
+	}
 
 	fclose(fp);
 
