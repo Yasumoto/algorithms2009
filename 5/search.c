@@ -37,7 +37,7 @@ int manhattan_distance()
 	return abs(current_x - goal_x) + abs(current_y - goal_y);
 }
 
-void find_next()
+void find_next(char** space, struct priority_queue *queue)
 {
 }
 	
@@ -99,9 +99,14 @@ int main(int argc, char** argv)
 	printf("current_x = %d", current_x);
 	printf("current_y = %d", current_y);
 
+        struct priority_queue q, *queue;
+	q.count = 0;
+
+	queue = &q;
+
 	while (current_x != goal_x && current_y != goal_y)
 	{
-                find_next();
+                find_next(space, queue);
 	}
 
 	fclose(fp);
