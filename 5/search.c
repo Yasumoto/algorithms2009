@@ -22,13 +22,13 @@
 /*
  * Check to see if a node is already contained in the queue
  */
-int contained(struct priority_queue *queue, char letter)
+int contained(struct priority_queue *queue, int current_x, int current_y)
 {
 	struct node *current_node = queue->queue;
 	int i;
 	for (i = 0; i <= queue->count; ++i)
 	{
-		if (current_node->data == letter)
+		if (current_node->x_location == current_x)
 			return 1;
 		else
 			current_node = current_node->next;
