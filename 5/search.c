@@ -154,11 +154,14 @@ int main(int argc, char** argv)
 	printf("Initial Y = %d\n", current_y);
 
         struct priority_queue q, *queue;
-	struct node init, *initial;
+	struct node initial;
 
 
-	init.data = space[current_x][current_y];
+	initial.data = space[current_x][current_y];
+	initial.x_location = current_x;
+	initial.y_location = current_y;
 
+	q.queue = &initial;
 	q.count = 1;
 
 	queue = &q;
