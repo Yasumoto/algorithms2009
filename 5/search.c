@@ -22,11 +22,11 @@
 /*
  * Check to see if a node is already contained in the queue
  */
-int contained(struct priority_queue *queue, int current_x, int current_y)
+int contained(struct priority_queue *queue, char letter, int current_x, int current_y)
 {
 	struct node *current_node = queue->queue;
 	int i;
-	for (i = 0; i <= queue->count; ++i)
+	for (i = 1; i <= queue->count; ++i)
 	{
 		if (current_node->x_location == current_x)
 			return 1;
@@ -41,6 +41,7 @@ int contained(struct priority_queue *queue, int current_x, int current_y)
  */
 void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
 {
+
 }
 
 
@@ -55,11 +56,15 @@ void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
  */
 char** build_environment(int size)
 {
+	printf("\nSize is: %d\n", size);
 	int i;
 	char **space = (char **)malloc(size * sizeof(char *));
 
-	for(i = 0; i < size; i++)
+	for(i = 0; i < size; ++i)
+	{
+		printf("Row number: %d\n", i);
 		space[i] = (char *)malloc(size * sizeof(char));
+	}
 
 	return space;
 }
@@ -79,7 +84,7 @@ int manhattan_distance(int current_x, int current_y)
 
 void find_next(char** space, struct priority_queue *queue, int current_x, int current_y)
 {
-	if (contained(queue, space[current_x][current_y]))
+	if (contained(queue, space[current_x][current_y], current_x, current_y))
 	{
 		return;
 	}
@@ -108,7 +113,7 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 	
-	int size = (int) fgetc(fp);
+	size = (int) (fgetc(fp) - '0');
 	fgetc(fp);
 
 
@@ -145,18 +150,20 @@ int main(int argc, char** argv)
 		}
 	}
 
-	printf("current_x = %d", current_x);
-	printf("current_y = %d", current_y);
+	printf("Initial X = %d\n", current_x);
+	printf("Initial Y = %d\n", current_y);
 
         struct priority_queue q, *queue;
-	q.count = 0;
+	struct node init, *initial;
+
+
+	init.data = space[current_x][current_y];
+
+	q.count = 1;
 
 	queue = &q;
 
-	while (current_x != goal_x && current_y != goal_y)
-	{
-                find_next(space, queue, current_x, current_y);
-	}
+	//find_next(space, queue, current_x, current_y);
 
 	fclose(fp);
 
