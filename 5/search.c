@@ -13,6 +13,31 @@
 #include "search.h"
 
 
+/* 
+ * Priority Queue Stuff
+ */
+
+/*
+ * Check to see if a node is already contained in the queue
+ */
+int contained(struct priority_queue *queue, char letter)
+{
+	struct node current_node = queue->queue;
+	int i;
+	for (i = 0; i <= count; ++i)
+	{
+		if (current_node.data == letter)
+			return 1;
+		else
+			current_node = current_node->next;
+	}
+	return 0;
+}
+
+
+/*
+ * Function to generate the environment from the text file
+ */
 char** build_environment(int size)
 {
 	int i;
@@ -39,6 +64,15 @@ int manhattan_distance()
 
 void find_next(char** space, struct priority_queue *queue)
 {
+	if (contains(*queue, space[current_x][current_y]))
+	{
+		return;
+	}
+	else
+	{
+		add(*queue, space[current_x][current_y]);
+		
+	}
 }
 	
 int main(int argc, char** argv)
