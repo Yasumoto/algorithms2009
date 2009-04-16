@@ -14,7 +14,9 @@
 
 
 /* 
+ ********************************
  * Priority Queue Stuff
+ ********************************
  */
 
 /*
@@ -22,11 +24,11 @@
  */
 int contained(struct priority_queue *queue, char letter)
 {
-	struct node current_node = queue->queue;
+	struct node *current_node = queue->queue;
 	int i;
-	for (i = 0; i <= count; ++i)
+	for (i = 0; i <= queue->count; ++i)
 	{
-		if (current_node.data == letter)
+		if (current_node->data == letter)
 			return 1;
 		else
 			current_node = current_node->next;
@@ -34,6 +36,19 @@ int contained(struct priority_queue *queue, char letter)
 	return 0;
 }
 
+/*
+ * Add a new node to the queue
+ */
+void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
+{
+}
+
+
+/*
+ ********************************
+ * Search Space functions
+ ********************************
+ */
 
 /*
  * Function to generate the environment from the text file
@@ -50,28 +65,27 @@ char** build_environment(int size)
 }
 
 //E((i,j),(i',j')) = sqrt[(i-i')^2+(j-j')^2])
-float euclidean_distance()
+float euclidean_distance(int current_x, int current_y)
 {
 	return sqrt( (float)(current_x - goal_x)*(float)(current_x - goal_x) +
 			(float)(current_y - goal_y)*(float)(current_y - goal_y) );
 }
 
 //M((i,j),(i',j')) = |i-i'| + |j-j'|)
-int manhattan_distance()
+int manhattan_distance(int current_x, int current_y)
 {
 	return abs(current_x - goal_x) + abs(current_y - goal_y);
 }
 
-void find_next(char** space, struct priority_queue *queue)
+void find_next(char** space, struct priority_queue *queue, int current_x, int current_y)
 {
-	if (contains(*queue, space[current_x][current_y]))
+	if (contained(queue, space[current_x][current_y]))
 	{
 		return;
 	}
 	else
 	{
-		add(*queue, space[current_x][current_y]);
-		
+		add(queue, space[current_x][current_y], current_x, current_y);
 	}
 }
 	
@@ -79,6 +93,7 @@ int main(int argc, char** argv)
 {
 	FILE *fp;
 	char letter;
+	int current_x, current_y;
 
 
 	if (argc == 1)
@@ -140,7 +155,7 @@ int main(int argc, char** argv)
 
 	while (current_x != goal_x && current_y != goal_y)
 	{
-                find_next(space, queue);
+                find_next(space, queue, current_x, current_y);
 	}
 
 	fclose(fp);
