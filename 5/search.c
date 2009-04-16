@@ -41,6 +41,13 @@ int contained(struct priority_queue *queue, char letter, int current_x, int curr
  */
 void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
 {
+	struct node new;
+	new.x_location = x_pos;
+	new.y_location = y_pos;
+	new.data = letter;
+	new.parent = queue->queue;
+
+	printf("%c", new.parent->data);
 
 }
 
