@@ -33,11 +33,3 @@ struct priority_queue
 	struct node* queue;
 	int count;
 };
-
-char** build_environment(int size);
-float euclidean_distance();
-int manhattan_distance();
-int contained(struct priority_queue *queue, char letter, int current_x, int current_y);
-void add(struct priority_queue *queue, char letter, int x_pos, int y_pos);
-
-
