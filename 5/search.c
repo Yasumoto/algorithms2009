@@ -28,7 +28,7 @@ int contained(struct priority_queue *queue, char letter, int current_x, int curr
 	int i;
 	for (i = 1; i <= queue->count; ++i)
 	{
-		if (current_node->x_location == current_x)
+		if (current_node->x_location == current_x && current_node->y_location == current_y)
 			return 1;
 		else
 			current_node = current_node->next;
@@ -41,13 +41,28 @@ int contained(struct priority_queue *queue, char letter, int current_x, int curr
  */
 void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
 {
-	struct node new;
+	struct node new, *current;
+	int i;
+
 	new.x_location = x_pos;
 	new.y_location = y_pos;
 	new.data = letter;
 	new.parent = queue->queue;
 
-	printf("%c", new.parent->data);
+	new.eu_priority  = euclidean_distance(x_pos, y_pos);
+
+	current = queue->queue;
+
+        for (i = 0; i <= queue->count; ++i)
+	{
+		if ( current->next->eu_priority >= new.eu_priority )
+		{
+			new.next = current->next;
+			current->next = &new;
+			queue->count = queue->count + 1;
+		}
+	}
+
 
 }
 
@@ -173,7 +188,7 @@ int main(int argc, char** argv)
 
 	queue = &q;
 
-	//find_next(space, queue, current_x, current_y);
+	find_next(space, queue, current_x, current_y);
 
 	fclose(fp);
 
