@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make clean && make && ./search test2.txt
+make clean && make && ./search test3.txt

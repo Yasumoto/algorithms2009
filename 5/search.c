@@ -56,9 +56,18 @@ int contained(priority_queue *queue, int current_x, int current_y)
 void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
 	// Check to prevent adding the parent back in to the queue
-	if (queue->queue->parent != NULL && (queue->queue->parent->x_location == x_pos) && (queue->queue->parent->y_location == y_pos))
+	node *ptr;
+	ptr = queue->queue;
+	int count = 0;
+	while(ptr->parent != NULL)
 	{
-		return;
+		if ((queue->queue->parent->x_location == x_pos) && (queue->queue->parent->y_location == y_pos))
+			return;
+		else
+		{
+			ptr = ptr->parent;
+			++count;
+		}
 	}
 
 	node *new, *current;
@@ -72,7 +81,7 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	new->data = letter;
 	new->parent = queue->queue;
 
-	new->eu_priority  = 1.0 + euclidean_distance(x_pos, y_pos);
+	new->eu_priority  = count + manhattan_distance(x_pos, y_pos);
 
 	current = queue->queue;
 
