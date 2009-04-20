@@ -92,14 +92,12 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	}
 
 	//printf("The data is: %c\n", new->data);
-	printf("X and Y values for root of the node are: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
+	//printf("X and Y values for root of the node are: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 }
 
 void dequeue(priority_queue *queue)
 {
-	node * temp;    
-	queue->queue->next = temp;
-	queue->queue = temp;
+	queue->queue = queue->queue->next;
 
 	queue->count = queue->count - 1;
 }
@@ -148,16 +146,16 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 	printf("Current Y: %d\n", current_y);
 	printf("***\n");
 
-	if (queue->count != 1 && contained(queue, current_x, current_y))
+	/*if (queue->count != 1 && contained(queue, current_x, current_y))
 	{
 		return;
 	}
 	else
-	{
+	{*/
 		//printf("Minus 1 to X\n");
 		current_x = orig_x - 1;
 		current_y = orig_y;
-		if (current_x >= 0 && current_y >= 0)
+		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
 		{
 			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 			{
@@ -168,7 +166,7 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		//printf("Plus 1 to X\n");
 		current_x = orig_x + 1;
 		current_y = orig_y;
-		if (current_x >= 0 && current_y >= 0)
+		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
 		{
 			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 			{
@@ -180,7 +178,7 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		//printf("Minus 1 to Y\n");
 		current_x = orig_x;
 		current_y = orig_y - 1;
-		if (current_x >= 0 && current_y >= 0)
+		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
 		{
 			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 			{
@@ -191,14 +189,14 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		//printf("Plus 1 to Y\n");
 		current_x = orig_x;
 		current_y = orig_y + 1;
-		if (current_x >= 0 && current_y >= 0)
+		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
 		{
 			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 			{
 				add(queue, space[current_x][current_y], current_x, current_y);
 			}
 		}
-	}
+	//}
 
 	dequeue(queue);
 	printf("We're done with this iteration, rolling again starting at: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
