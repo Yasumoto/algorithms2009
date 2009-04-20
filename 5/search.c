@@ -43,13 +43,10 @@ int contained(priority_queue *queue, int current_x, int current_y)
 	for (i = 1; i <= queue->count; ++i)
 	{
 		//printf("This is i: %d\n", i);
-		if (current_node->x_location == current_x && current_node->y_location == current_y)
-		{
-			//printf("It was contained.\n");
+		if ((current_node->x_location == current_x) && (current_node->y_location == current_y))
 			return 1;
-		}
-		else
-			current_node = current_node->next;
+
+		current_node = current_node->next;
 	}
 	return 0;
 }
@@ -65,8 +62,6 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 
 	int i;
 
-        //printf("We're adding a new node: here's the x_pos! %d\n", x_pos);
-        //printf("We're adding a new node: here's the y_pos! %d\n", y_pos);
 
 	new->x_location = x_pos;
 	new->y_location = y_pos;
@@ -82,6 +77,8 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	{
 		if ( current->next == NULL || current->next->eu_priority >= new->eu_priority )
 		{
+			printf("We're adding a new node: here's the x_pos! %d\n", x_pos);
+			printf("We're adding a new node: here's the y_pos! %d\n", y_pos);
 			new->next = current->next;
 			current->next = new;
 			queue->count = queue->count + 1;
@@ -90,11 +87,14 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	}
 
 	//printf("The data is: %c\n", new->data);
+	printf("X and Y values for next node are: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 }
 
 void dequeue(priority_queue *queue)
 {
-	queue->queue = queue->queue->next;
+	node * temp;    
+	queue->queue->next = temp; 
+	queue->queue = temp;
 	queue->count = queue->count - 1;
 }
 
@@ -194,8 +194,8 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		}
 	}
 
-	dequeue(queue);                                    
-	//printf("We're done with this iteration, here's the y_location! %d\n", queue->queue->y_location);
+	//dequeue(queue);                                    
+	printf("We're done with this iteration, here's the y_location! %d\n", queue->queue->y_location);
 	//printf("We're done with this iteration, here's the x_location! %d\n", queue->queue->x_location);
 	find_next(space, queue, queue->queue->x_location, queue->queue->y_location);
 }
@@ -257,19 +257,21 @@ int main(int argc, char** argv)
 	}
 
         priority_queue q, *queue;
-	node initial;
+	node * initial;
+
+	initial = (node *) malloc (sizeof(node));
 
 
-	initial.data = space[current_x][current_y];
-	initial.x_location = current_x;
-	initial.y_location = current_y;
+	initial->data = space[current_x][current_y];
+	initial->x_location = current_x;
+	initial->y_location = current_y;
 
 	//printf("***\n");
 	//printf("Initial X: %d\n", current_x);
 	//printf("Initial Y: %d\n", current_y);
 	//printf("***\n");
 
-	q.queue = &initial;
+	q.queue = initial;
 	q.count = 1;
 
 	queue = &q;
