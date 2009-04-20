@@ -56,6 +56,12 @@ int contained(priority_queue *queue, int current_x, int current_y)
  */
 void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
+	if (queue->queue->parent != NULL && (queue->queue->parent->x_location == x_pos) && (queue->queue->parent->y_location == y_pos))
+	{
+		printf("null");
+		return;
+	}
+
 	node *new, *current;
 
 	new = (node *) malloc (sizeof(node));
@@ -93,8 +99,9 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 void dequeue(priority_queue *queue)
 {
 	node * temp;    
-	queue->queue->next = temp; 
+	queue->queue->next = temp;
 	queue->queue = temp;
+
 	queue->count = queue->count - 1;
 }
 
