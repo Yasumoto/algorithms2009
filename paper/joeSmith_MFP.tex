@@ -1,0 +1,17 @@
+\documentclass[a4paper,11pt, twocolumn]{article}
+\usepackage{latexsym}
+\author{Joe Smith}
+\title{Maximum Flow Problems}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In this paper, we will present the Maximum Flow problem, as well as the Ford-Fulkerson algorithm to solve it. The Maximum Flow problem is given a directed graph, one must find the path of greatest length from a source to a sink. We shall also discuss the history of its development, as well as discuss an application of the problem.
+\end{abstract}
+
+\section{Introduction}
+\subsection{Maximum Flow Problems}
+Maximum flow problems come in many forms, but are typically represented using an undirected weighted graph. This graph has two special vertices, the source and the sink, and represent the start and end nodes on the graph. The problem seeks to find the greatest path from the source to the sink.
+
+For instance, imagine an internetwork connecting various cities. There is a router in Orange, CA that is trying to direct packets to a server in Boston, MA. It may find that the fastest route is not the physically shortest, due to the quality of the link. The algorithms it employs determine the 'greatest flow' that can possibly be routed through the graph, and the packets are forwarded along accordingly.
+\end{document}
