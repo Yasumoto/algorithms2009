@@ -253,9 +253,11 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 	
-	size = (int) (fgetc(fp) - '0');
-	fgetc(fp);
+        char length[200];
 
+	fgets(length,20,fp);
+
+	size = atoi(length);
 
 	char **space = build_environment(size);
 
