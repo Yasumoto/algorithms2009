@@ -33,3 +33,5 @@ typedef struct priority_queue
 	struct node* queue;
 	int count;
 } priority_queue;
+
+void build_new(char** space, priority_queue *queue);

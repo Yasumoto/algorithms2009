@@ -83,7 +83,7 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	{
 		if ( current->next == NULL || current->next->eu_priority >= new->eu_priority )
 		{
-			printf("We're adding a new node: (%d, %d)\n", x_pos, y_pos);
+			//printf("We're adding a new node: (%d, %d)\n", x_pos, y_pos);
 			new->next = current->next;
 			current->next = new;
 			queue->count = queue->count + 1;
@@ -120,7 +120,7 @@ char** build_environment(int size)
 
 	for(i = 0; i < size; ++i)
 	{
-		printf("Row number: %d\n", i);
+		//printf("Row number: %d\n", i);
 		space[i] = (char *)malloc(size * sizeof(char));
 	}
 
@@ -135,16 +135,17 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 
 	if (current_x == goal_x && current_y == goal_y)
 	{
-		printf("GG!");
-		printf("Final X: %d\n", current_x);
-		printf("Final Y: %d\n", current_y);
+		//printf("Final X: %d\n", current_x);
+		//printf("Final Y: %d\n", current_y);
+		printf("\n\n");
+		build_new(space, queue);
 		return;
 	}
 
-	printf("***\n");
+	/*printf("***\n");
 	printf("Current X: %d\n", current_x);
 	printf("Current Y: %d\n", current_y);
-	printf("***\n");
+	printf("***\n");*/
 
 	/*if (queue->count != 1 && contained(queue, current_x, current_y))
 	{
@@ -199,11 +200,55 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 	//}
 
 	dequeue(queue);
-	printf("We're done with this iteration, rolling again starting at: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
-	//printf("We're done with this iteration, here's the x_location! %d\n", queue->queue->x_location);
+	//printf("We're done with this iteration, rolling again starting at: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 	find_next(space, queue, queue->queue->x_location, queue->queue->y_location);
 }
 	
+void build_new(char** space, priority_queue *queue)
+{
+	int i, j;
+	char **space2 = build_environment(size);
+	node* ptr, *ptr2;
+	ptr = queue->queue;
+	for (i = 0; i < size; ++i)
+	{
+		for (j = 0; j < size; ++j)
+		{
+			ptr2 = queue->queue;
+
+			if (ptr->x_location == i && ptr->y_location == j)
+				space2[i][j] = 'g';
+
+			else
+			{
+				//printf("[%d][%d]\n", i, j);
+				while (ptr2->parent != NULL)
+				{
+					ptr2 = ptr2->parent;
+
+					if (ptr2->x_location == i && ptr2->y_location == j)
+						space2[i][j] = 'O';
+
+					else
+						space2[i][j] = space[i][j];
+				}
+			}
+			if (space[i][j] == 'i')
+				space2[i][j] = 'i';
+		}
+	}
+
+	for (i = 0; i < size; ++i)
+	{
+		for (j = 0; j < size; ++j)
+			printf("%c", space2[j][i]);
+
+		printf("\n");
+	}
+
+}
+
+
 int main(int argc, char** argv)
 {
 	FILE *fp;
