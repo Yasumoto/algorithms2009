@@ -6,3 +6,4 @@
 *.log
 *.class
 *.o
+core
