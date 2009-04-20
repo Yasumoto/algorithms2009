@@ -59,10 +59,11 @@ int contained(priority_queue *queue, int current_x, int current_y)
  */
 void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
-	node first, *new, *current;
-	int i;
+	node *new, *current;
 
-	new = &first;
+	new = (node *) malloc (sizeof(node));
+
+	int i;
 
         //printf("We're adding a new node: here's the x_pos! %d\n", x_pos);
         //printf("We're adding a new node: here's the y_pos! %d\n", y_pos);
@@ -93,12 +94,8 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 
 void dequeue(priority_queue *queue)
 {
-	printf("THIS IS THE %d\n", queue->queue->x_location);
-	printf("THIS IS THE %d\n", queue->queue->y_location);
 	queue->queue = queue->queue->next;
 	queue->count = queue->count - 1;
-	printf("THIS IS THE %d\n", queue->queue->x_location);
-	printf("THIS IS THE %d\n", queue->queue->y_location);
 }
 
 
@@ -131,6 +128,14 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 {
 	int current_x = orig_x;
 	int current_y = orig_y;
+
+	if (current_x == goal_x && current_y == goal_y)
+	{
+		printf("GG!");
+		printf("Final X: %d\n", current_x);
+		printf("Final Y: %d\n", current_y);
+		return;
+	}
 
 	printf("***\n");
 	printf("Current X: %d\n", current_x);
