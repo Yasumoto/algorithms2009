@@ -1,5 +1,6 @@
 ./cls/*
 *.swp
+*.swo
 *.aux
 *.pdf
 *.log
