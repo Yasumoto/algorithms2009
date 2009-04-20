@@ -58,7 +58,7 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
 	if (queue->queue->parent != NULL && (queue->queue->parent->x_location == x_pos) && (queue->queue->parent->y_location == y_pos))
 	{
-		printf("null");
+		//printf("Whoa there, don't add a parent!\n");
 		return;
 	}
 
@@ -83,8 +83,7 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	{
 		if ( current->next == NULL || current->next->eu_priority >= new->eu_priority )
 		{
-			printf("We're adding a new node: here's the x_pos! %d\n", x_pos);
-			printf("We're adding a new node: here's the y_pos! %d\n", y_pos);
+			printf("We're adding a new node: (%d, %d)\n", x_pos, y_pos);
 			new->next = current->next;
 			current->next = new;
 			queue->count = queue->count + 1;
@@ -201,8 +200,8 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		}
 	}
 
-	//dequeue(queue);                                    
-	printf("We're done with this iteration, here's the y_location! %d\n", queue->queue->y_location);
+	dequeue(queue);
+	printf("We're done with this iteration, rolling again starting at: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 	//printf("We're done with this iteration, here's the x_location! %d\n", queue->queue->x_location);
 	find_next(space, queue, queue->queue->x_location, queue->queue->y_location);
 }
