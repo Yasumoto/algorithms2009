@@ -39,10 +39,9 @@ int contained(priority_queue *queue, int current_x, int current_y)
 	
 	node *current_node = queue->queue;
 	int i;
-	//printf("Doing contained: Queue count: %d\n", queue->count);
 	for (i = 1; i <= queue->count; ++i)
 	{
-		//printf("This is i: %d\n", i);
+		// If the location is the same as a previously added node, don't add it again
 		if ((current_node->x_location == current_x) && (current_node->y_location == current_y))
 			return 1;
 
@@ -56,9 +55,9 @@ int contained(priority_queue *queue, int current_x, int current_y)
  */
 void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
+	// Check to prevent adding the parent back in to the queue
 	if (queue->queue->parent != NULL && (queue->queue->parent->x_location == x_pos) && (queue->queue->parent->y_location == y_pos))
 	{
-		//printf("Whoa there, don't add a parent!\n");
 		return;
 	}
 
@@ -68,14 +67,12 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 
 	int i;
 
-
 	new->x_location = x_pos;
 	new->y_location = y_pos;
 	new->data = letter;
 	new->parent = queue->queue;
 
 	new->eu_priority  = 1.0 + euclidean_distance(x_pos, y_pos);
-	//printf("And the EU priority is %f\n", new->eu_priority);
 
 	current = queue->queue;
 
@@ -114,13 +111,11 @@ void dequeue(priority_queue *queue)
  */
 char** build_environment(int size)
 {
-	//printf("\nSize is: %d\n", size);
 	int i;
 	char **space = (char **)malloc(size * sizeof(char *));
 
 	for(i = 0; i < size; ++i)
 	{
-		//printf("Row number: %d\n", i);
 		space[i] = (char *)malloc(size * sizeof(char));
 	}
 
@@ -142,65 +137,52 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 		return;
 	}
 
-	/*printf("***\n");
-	printf("Current X: %d\n", current_x);
-	printf("Current Y: %d\n", current_y);
-	printf("***\n");*/
-
-	/*if (queue->count != 1 && contained(queue, current_x, current_y))
+	//printf("Minus 1 to X\n");
+	current_x = orig_x - 1;
+	current_y = orig_y;
+	if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
 	{
-		return;
+		if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
+		{
+			add(queue, space[current_x][current_y], current_x, current_y);
+		}
 	}
-	else
-	{*/
-		//printf("Minus 1 to X\n");
-		current_x = orig_x - 1;
-		current_y = orig_y;
-		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
-		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
-		}
 
-		//printf("Plus 1 to X\n");
-		current_x = orig_x + 1;
-		current_y = orig_y;
-		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	//printf("Plus 1 to X\n");
+	current_x = orig_x + 1;
+	current_y = orig_y;
+	if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	{
+		if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
+			add(queue, space[current_x][current_y], current_x, current_y);
 		}
+	}
 
 
-		//printf("Minus 1 to Y\n");
-		current_x = orig_x;
-		current_y = orig_y - 1;
-		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	//printf("Minus 1 to Y\n");
+	current_x = orig_x;
+	current_y = orig_y - 1;
+	if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	{
+		if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
+			add(queue, space[current_x][current_y], current_x, current_y);
 		}
+	}
 
-		//printf("Plus 1 to Y\n");
-		current_x = orig_x;
-		current_y = orig_y + 1;
-		if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	//printf("Plus 1 to Y\n");
+	current_x = orig_x;
+	current_y = orig_y + 1;
+	if (current_x >= 0 && current_y >= 0 && current_x < size && current_y < size)
+	{
+		if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
 		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
+			add(queue, space[current_x][current_y], current_x, current_y);
 		}
-	//}
+	}
 
 	dequeue(queue);
-	//printf("We're done with this iteration, rolling again starting at: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 	find_next(space, queue, queue->queue->x_location, queue->queue->y_location);
 }
 	
@@ -227,7 +209,10 @@ void build_new(char** space, priority_queue *queue)
 					ptr2 = ptr2->parent;
 
 					if (ptr2->x_location == i && ptr2->y_location == j)
+					{
 						space2[i][j] = 'O';
+						break;
+					}
 
 					else
 						space2[i][j] = space[i][j];
@@ -314,11 +299,6 @@ int main(int argc, char** argv)
 	initial->data = space[current_x][current_y];
 	initial->x_location = current_x;
 	initial->y_location = current_y;
-
-	//printf("***\n");
-	//printf("Initial X: %d\n", current_x);
-	//printf("Initial Y: %d\n", current_y);
-	//printf("***\n");
 
 	q.queue = initial;
 	q.count = 1;
