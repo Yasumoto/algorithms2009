@@ -3,7 +3,7 @@
 # $@ is the name of the rule.
 
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -lm -g
 objects = search.o
 .PHONY: clean
 
