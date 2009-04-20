@@ -92,7 +92,7 @@ void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 	}
 
 	//printf("The data is: %c\n", new->data);
-	printf("X and Y values for next node are: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
+	printf("X and Y values for root of the node are: (%d, %d)\n", queue->queue->x_location, queue->queue->y_location);
 }
 
 void dequeue(priority_queue *queue)
@@ -154,8 +154,31 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 	}
 	else
 	{
-		//printf("Minus 1 to both\n");
+		//printf("Minus 1 to X\n");
 		current_x = orig_x - 1;
+		current_y = orig_y;
+		if (current_x >= 0 && current_y >= 0)
+		{
+			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
+			{
+				add(queue, space[current_x][current_y], current_x, current_y);
+			}
+		}
+
+		//printf("Plus 1 to X\n");
+		current_x = orig_x + 1;
+		current_y = orig_y;
+		if (current_x >= 0 && current_y >= 0)
+		{
+			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
+			{
+				add(queue, space[current_x][current_y], current_x, current_y);
+			}
+		}
+
+
+		//printf("Minus 1 to Y\n");
+		current_x = orig_x;
 		current_y = orig_y - 1;
 		if (current_x >= 0 && current_y >= 0)
 		{
@@ -165,31 +188,8 @@ void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 			}
 		}
 
-		//printf("Minus 1 to X, Plus 1 to y\n");
-		current_x = orig_x - 1;
-		current_y = orig_y + 1;
-		if (current_x >= 0 && current_y >= 0)
-		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
-		}
-
-
-		//printf("Plus 1 to X, Minus 1 to y\n");
-		current_x = orig_x + 1;
-		current_y = orig_y - 1;
-		if (current_x >= 0 && current_y >= 0)
-		{
-			if (space[current_x][current_y] != '+' && !contained(queue, current_x, current_y))
-			{
-				add(queue, space[current_x][current_y], current_x, current_y);
-			}
-		}
-
-		//printf("Plus 1 to both\n");
-		current_x = orig_x + 1;
+		//printf("Plus 1 to Y\n");
+		current_x = orig_x;
 		current_y = orig_y + 1;
 		if (current_x >= 0 && current_y >= 0)
 		{
