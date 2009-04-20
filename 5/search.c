@@ -34,16 +34,18 @@ int manhattan_distance(int current_x, int current_y)
 /*
  * Check to see if a node is already contained in the queue
  */
-int contained(struct priority_queue *queue, int current_x, int current_y)
+int contained(priority_queue *queue, int current_x, int current_y)
 {
 	
-	struct node *current_node = queue->queue;
+	node *current_node = queue->queue;
 	int i;
+	printf("Doing contained: Queue count: %d\n", queue->count);
 	for (i = 1; i <= queue->count; ++i)
 	{
+		printf("This is i: %d\n", i);
 		if (current_node->x_location == current_x && current_node->y_location == current_y)
 		{
-			printf("It was contained.");
+			printf("It was contained.\n");
 			return 1;
 		}
 		else
@@ -55,44 +57,48 @@ int contained(struct priority_queue *queue, int current_x, int current_y)
 /*
  * Add a new node to the queue
  */
-void add(struct priority_queue *queue, char letter, int x_pos, int y_pos)
+void add(priority_queue *queue, char letter, int x_pos, int y_pos)
 {
-	struct node first, *new, *current;
+	node first, *new, *current;
 	int i;
 
 	new = &first;
 
-        printf("here's the x_pos! %d\n", x_pos);
+        printf("We're adding a new node: here's the x_pos! %d\n", x_pos);
+        printf("We're adding a new node: here's the y_pos! %d\n", y_pos);
 
 	new->x_location = x_pos;
 	new->y_location = y_pos;
 	new->data = letter;
 	new->parent = queue->queue;
 
-	new->eu_priority  = euclidean_distance(x_pos, y_pos);
+	new->eu_priority  = 1.0 + euclidean_distance(x_pos, y_pos);
+	printf("And the EU priority is %f\n", new->eu_priority);
 
 	current = queue->queue;
 
         for (i = 0; i <= queue->count; ++i)
 	{
-		if ( current->next->eu_priority >= new->eu_priority )
+		if ( current->next == NULL || current->next->eu_priority >= new->eu_priority )
 		{
 			new->next = current->next;
 			current->next = new;
 			queue->count = queue->count + 1;
+			break;
 		}
 	}
 
 	printf("The data is: %c\n", new->data);
-
-	queue->count = queue->count + 1;
-
-
 }
 
-void dequeue(struct priority_queue *queue)
+void dequeue(priority_queue *queue)
 {
+	printf("THIS IS THE %d\n", queue->queue->x_location);
+	printf("THIS IS THE %d\n", queue->queue->y_location);
 	queue->queue =  queue->queue->next;
+	queue->count = queue->count - 1;
+	printf("THIS IS THE %d\n", queue->queue->x_location);
+	printf("THIS IS THE %d\n", queue->queue->y_location);
 }
 
 
@@ -121,7 +127,7 @@ char** build_environment(int size)
 }
 
 
-void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_y)
+void find_next(char** space, priority_queue *queue, int orig_x, int orig_y)
 {
 	int current_x = orig_x;
 	int current_y = orig_y;
@@ -137,6 +143,7 @@ void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_
 	}
 	else
 	{
+		printf("Minus 1 to both\n");
 		current_x = orig_x - 1;
 		current_y = orig_y - 1;
 		if (current_x >= 0 && current_y >= 0)
@@ -147,6 +154,7 @@ void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_
 			}
 		}
 
+		printf("Minus 1 to X, Plus 1 to y\n");
 		current_x = orig_x - 1;
 		current_y = orig_y + 1;
 		if (current_x >= 0 && current_y >= 0)
@@ -158,6 +166,7 @@ void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_
 		}
 
 
+		printf("Plus 1 to X, Minus 1 to y\n");
 		current_x = orig_x + 1;
 		current_y = orig_y - 1;
 		if (current_x >= 0 && current_y >= 0)
@@ -168,6 +177,7 @@ void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_
 			}
 		}
 
+		printf("Plus 1 to both\n");
 		current_x = orig_x + 1;
 		current_y = orig_y + 1;
 		if (current_x >= 0 && current_y >= 0)
@@ -180,7 +190,8 @@ void find_next(char** space, struct priority_queue *queue, int orig_x, int orig_
 	}
 
 	dequeue(queue);                                    
-	printf("Here's the y-location! %d\n", queue->queue->y_location);
+	printf("We're done with this iteration, here's the y_location! %d\n", queue->queue->y_location);
+	printf("We're done with this iteration, here's the x_location! %d\n", queue->queue->x_location);
 	find_next(space, queue, queue->queue->x_location, queue->queue->y_location);
 }
 	
@@ -240,8 +251,8 @@ int main(int argc, char** argv)
 		}
 	}
 
-        struct priority_queue q, *queue;
-	struct node initial;
+        priority_queue q, *queue;
+	node initial;
 
 
 	initial.data = space[current_x][current_y];

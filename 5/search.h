@@ -11,7 +11,7 @@ int size;
 
 int goal_x, goal_y;
 
-struct node 
+typedef struct node 
 {
 	int x_location;
 	int y_location;
@@ -26,10 +26,10 @@ struct node
 	struct node* next;
 	// The parent node in the search tree
 	struct node* parent;
-};
+} node;
 
-struct priority_queue 
+typedef struct priority_queue 
 {
 	struct node* queue;
 	int count;
-};
+} priority_queue;
