@@ -1,0 +1,4 @@
+\bibliography{USE-BIBLIOGRAPHY-STYLE-HERE}
+\bibliography{name-of-jibba}
+
+run pdflatex twice, bibtex, then pdflatex twice again
