@@ -1,0 +1,51 @@
+"We've learned about this, now how would you extend it to deal with.."
+Don't forget to exploit partial credit "I see some structure here, and some here. Maybe we can exploit this to do..."
+
+Funal Exam Fun
+-----------------------
+
+Asymptotic Analysis
+	- Substitution
+	- Master Method ( know three types of jibbas )
+		- recurrence relations
+Quantitative Analysis
+	- empirical
+O/Omega Notation
+	- Formal Definitions
+
+Automata
+-----------------
+DFA/NFA
+	- Formal defs
+	- conversion
+	- applications
+	- alternative forms
+		- regex
+	- closure properties
+	- pumping lemma
+PDA
+	- CFG
+	- BNF/CNF
+Turing Machines
+	- Def
+	- Deciders/Verifiers
+
+Algorithm Techniques
+------------------------
+Dynamic Programming
+Heuristic Algorithms
+	- What is a heuristic
+	- admissable/consistent
+	- when & why
+Probabilistic/Random/Optimization Algorithms
+	-EM w/Mixtures of Gaussians (Expectation Maximization)
+	- compare to kmeans
+	- data structures
+		- skip lists (be able to talk about comparison with other structures)
+Complexity
+--------------
+P vs. NP
+<= p (polynomial time reducible) (doing reductions) (there's a reduction problem on the exam) (make sure you know about 3 sat, since satisfiability is used a lot)
+NP completeness
+Tractible vs. Intractible (If it's tractible, it can be solved computationally)
+	- Halting problem
