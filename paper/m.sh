@@ -1,3 +1,3 @@
 #!/bin/sh
 
-make clean && make && make && evince joeSmith_MFP.pdf
+make clean && make && make && evince joeSmith_MaxFlow.pdf
