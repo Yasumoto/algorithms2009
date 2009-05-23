@@ -362,7 +362,7 @@
 \IEEEauthorblockA{Department of Math and Computer Science\\
 Chapman University\\
 Orange, California 92866\\
-Email: smith237@mail.chapman.edu}
+smith237@mail.chapman.edu}
 }
 
 % conference papers do not typically use \thanks and this command
@@ -442,10 +442,15 @@ In this paper, we will present the Maximum Flow problem, as well as the Ford-Ful
 %\hfill January 11, 2007
 
 \subsection{Maximum Flow Problems}
-Maximum flow problems come in many forms, but are typically represented using an undirected weighted graph. This graph has two special vertices, the source and the sink, and represent the start and end nodes on the graph. The problem seeks to find the greatest path from the source to the sink.
+Maximum flow problems come in many forms, but are typically represented using an undirected weighted graph. This graph has two special vertices, the source and the sink, and represent the start and end nodes on the graph. The problem seeks to find the greatest value that can be created from the source to the sink. Although there may be edges which have a large capacity, they may be limited by a restrictively low-capacity edge that connects to the sink.
 
 For instance, imagine an internetwork connecting various cities. There is a router in Orange, CA that is trying to direct packets to a server in Boston, MA. It may find that the fastest route is not the physically shortest, due to the quality of the link. The algorithms it employs determine the 'greatest flow' that can possibly be routed through the graph, and the packets are forwarded along accordingly.
 
+\section{The Greedy Algorithm}
+The greedy algorithm is one which may seem to be effective at first, but turns out to have greater costs associated with it than initially apparent.
+
+\section{Ford-Fulkerson Algorithm}
+The Ford-Fulkerson algorithm is actually 
 
 
 % An example of a floating figure using the graphicx package.
