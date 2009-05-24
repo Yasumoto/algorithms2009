@@ -1,0 +1,49 @@
+class FlowNetwork(object):
+    def __init__(self):
+        self.adj, self.flow, = {},{}
+ 
+    def add_vertex(self, vertex):
+        self.adj[vertex] = []
+ 
+    def get_edges(self, v):
+        return self.adj[v]
+ 
+    def add_edge(self, u,v,w=0):
+        self.adj[u].append((v,w))
+        self.adj[v].append((u,0))
+        self.flow[(u,v)] = self.flow[(v,u)] = 0
+ 
+    def find_path(self, source, sink, path):
+        if source == sink:
+            return path
+        for vertex, capacity in self.get_edges(source):
+            residual = capacity - self.flow[(source,vertex)]
+            edge = (source,vertex,residual)
+            if residual > 0 and not edge in path:
+                result = self.find_path(vertex, sink, path + [edge]) 
+                if result != None:
+                    return result
+ 
+    def max_flow(self, source, sink):
+        path = self.find_path(source, sink, [])
+        while path != None:
+            flow = min(r for u,v,r in path)
+            for u,v,_ in path:
+                self.flow[(u,v)] += flow
+                self.flow[(v,u)] -= flow
+            path = self.find_path(source, sink, [])
+        return sum(self.flow[(source, vertex)] for vertex, capacity in self.get_edges(source))
+
+
+
+g=FlowNetwork()
+map(g.add_vertex, ['s','o','p','q','r','t'])
+g.add_edge('s','o',3)
+g.add_edge('s','p',3)
+g.add_edge('o','p',2)
+g.add_edge('o','q',3)
+g.add_edge('p','r',2)
+g.add_edge('r','t',3)
+g.add_edge('q','r',4)
+g.add_edge('q','t',2)
+print g.max_flow('s','t')
