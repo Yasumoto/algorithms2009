@@ -14,6 +14,8 @@ class edge(object):
 		self.flow = 0
 		self.u, self.v = u, v
 
+# initialize graph with edges,
+# including a source s and a sink t
 graph = {}
 
 #    _A__C_
@@ -43,28 +45,33 @@ graph['d'][0].capacity = 3
 
 graph['t'] = []
 
-# Discover a path    
 
 total_flow = 0
-path = []
 
-minimum_capacity = 0
-
+# start at the source
 node = graph['s']
-for i in node:         
-	while (i.flow < i.capacity and i.u != 't'):
-		flow_available = i.capacity - i.flow
-		if(9001 > flow_available):
-			minimum_capacity = flow_available
-		path.append(i)
-		if (i.v != 't'):
-			i = graph[i.v][0]
-		else:
-			break
-	total_flow += minimum_capacity 
 
-	for i in path:
-		i.flow += minimum_capacity
+for i in node:
+        # find the least capacity in the path
+        minimum_capacity = 9001
+        path = []
+        # Ensure the sink hasn't been reached,
+        # and that there is more capacity available
+        while (i.flow < i.capacity and i.u != 't'):
+                flow_available = i.capacity - i.flow
+                if(minimum_capacity > flow_available):
+                        minimum_capacity = flow_available
+                path.append(i)
+                # stop before the sink
+                if (i.v != 't'):
+                        i = graph[i.v][0]
+                else:
+                        break
+        total_flow += minimum_capacity
+
+        # update the flow values for each node
+        for i in path:
+                i.flow += minimum_capacity
 
 print total_flow
 
