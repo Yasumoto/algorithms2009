@@ -262,7 +262,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title{Maximum Flow Problems}
+\title{Maximum Flow Problems\\The Ford-Fulkerson Algorithm}
 
 
 \author{\IEEEauthorblockN{Joe Smith}
@@ -276,36 +276,19 @@ smith237@mail.chapman.edu}
 
 \begin{abstract}
 %\boldmath
-In this paper, we will present the Maximum Flow problem, as well as the Ford-Fulkerson algorithm to solve it. The Maximum Flow problem is given a directed graph, one must find the path of greatest length from a source to a sink. We shall also discuss the history of its development, as well as discuss several applications of the problem, as well as its importance and advancements.
+In this survey paper, we will present the Maximum Flow problem, as well as the Ford-Fulkerson algorithm to solve it. The Maximum Flow problem is given a directed graph, one must find the path of greatest length from a source to a sink. We shall also discuss the history of its development, as well as discuss several applications of the problem, as well as its importance and advancements. After covering background of the topic, we discuss an implementation written in the Python programming language.
 \end{abstract}
-% IEEEtran.cls defaults to using nonbold math in the Abstract.
-% This preserves the distinction between vectors and scalars. However,
-% if the conference you are submitting to favors bold math in the abstract,
-% then you can use LaTeX's standard command \boldmath at the very start
-% of the abstract to achieve this. Many IEEE journals/conferences frown on
-% math in the abstract anyway.
 
-% no keywords
-
-
-
-
-% For peer review papers, you can put extra information on the cover
-% page as needed:
-% \ifCLASSOPTIONpeerreview
-% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-% \fi
-%
-% For peerreview papers, this IEEEtran command inserts a page break and
-% creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
-
-
 
 \section{Introduction}
 Flow networks are a specialized form of directed graph, and lead to an interesting array of real-life applications. There are several problems that can be modeled using flow networks, the Ford-Fulkerson algorithm is one of the most widely used algorithm in flow problems. It is a large improvement over the greedy algorithm, and one which is used to efficiently transport data and materials in areas such as data networks and transportation. It makes use of the foundations of graph theory, and expands upon the work on mathematicians who are attempting to work on discovering the maximum flow that can pass through a graph from a single source to a single sink.
 
 It is an extremely important area of study, as it has massive implications throughout many practical applications. Fortunately, it is an area that is well understood mathematically. Rather than the typical thought of a graph representing a map of roads, or a list of connections, the flow network is used to represent a constant movement of objects through the graph. 
+
+We'll begin with a discussion of the background of flow networks, which are a subset of directed graphs, giving a formal definition for them. Following will be a discussion of flow, along with a formal definition of what it means to "transfer material between nodes on a flow network." From there we will cover Maximum Flow problems in general, giving a basis for the problem along with several examples of applications. 
+
+The next section will cover the greedy algorithm, and will show how it is an ineffective means for planning the flow of material through a flow network. The main portion of the paper is dedicated to the Ford-Fulkerson Algorithm itself, and will discuss its history, pseudocode of the algorithm, and a step-by-step example of the algorithm being used. The last section will discuss an implementation written in Python. Firstly, we start by smoothly flowing into a discussion of the problem area.
 
 \section{Background}
 %Applications
@@ -356,7 +339,10 @@ Maximum flow problems come in many forms, but are typically represented using an
 For instance, imagine an internetwork connecting various cities. There is a router in Orange, CA that is trying to direct packets to a server in Boston, MA. It may find that the fastest route is not the physically shortest, due to the quality of the link. The ``fastest link'' in this case generally means the one that can pass along the most data from point to point. Unfortunately, because there can be constrictions in terms of capacity further down the path, it can be ineffective to attempt to send the maximum amount of data through a single network link without understanding the full path. If a customer has a 1000MB/s line with ISP A, and a 100 MB/s line with ISP B, then it may seem most effective to tunnel most traffic through ISP A. However, if the destination server has a 1MB/s connection with ISP A, and a 100MB/s connection with ISP B, it would make most sense instead to use the connection with the second ISP. As this shows, the effect of the algorithm used to determine the maximum flow is extremely important.
 
 \section{The Greedy Algorithm}
-The greedy algorithm to find the maximum flow of a flow network, is one which may seem to be effective at first, but turns out to have greater costs associated with it than initially apparent. This approach is to start at the source, and move to the next node that is connected by an edge with the greatest weight. This shows that the edge with most weight is also the one with the most flow. From there, one must look at the nodes connected to the current node, and choose the one that is attached by the most flow. After this is completed, the process is repeated until the sink node is reached. Then one examines all of the edges in the path, and finds the edge with the least remaining capacity, and sends that much "material" through that path, increasing the flow by that amount.
+The greedy algorithm to find the maximum flow of a flow network, is one which may seem to be effective at first, but turns out to have greater costs associated with it than initially apparent. This approach is to start at the source, and move to the next node that is connected by an edge with the greatest weight. (This shows that the edge with most weight is also the one with the most flow.) From there, one must look at the nodes connected to the current node, and choose the one that is attached by the most flow. After this is completed, the process is repeated until the sink node is reached. So after one sends that much "material" through that path, the flow is increased by that amount.
+
+Unfortunately, this process doesn't seem to work out very well in practice. Imagine a series of tracks connecting various railroad stations across a country. Each train must ship a certain amount of freight each day, and if they were to follow this algorithm, craziness would ensue. If a train were to depart the station and carried 200 train cars, but then arrived at the station at the same time as another 200 car train from another station, there would be deadlock and supreme brutality as trains attempted to squeeze through smaller, backwater stations with any sort of efficiency. What is needed is a much more thoroughly planned and methodical approach.
+
 
 \section{Ford-Fulkerson Algorithm}
 \subsection{History}
@@ -390,11 +376,30 @@ This is repeated until no more paths with available flow are found.
 \begin{figure}[t]                     
 \centering                             
 \includegraphics[width=3.5in]{weighted_ex_2.pdf}
-\caption{Sample Flow Network}           
+\caption{Initial Flow Network}           
 \label{fig:network1}                        
 \end{figure}                           
 
-As can be seen in Figure \ref{fig:network1}, a flow network can be rather simple.
+\begin{figure}[t]                     
+\centering                             
+\includegraphics[width=3.5in]{weighted_ex_2b.pdf}
+\caption{Step 2: Flow Network}           
+\label{fig:network2}
+\end{figure}                           
+
+\begin{figure}[t!]                     
+\centering                             
+\includegraphics[width=3.5in]{weighted_ex_2c.pdf}
+\caption{Step 3: Flow Network}           
+\label{fig:network3}
+\end{figure}                           
+
+
+As can be seen in Figure \ref{fig:network1}, a flow network can be rather simple. We shall start by setting the current flow through each node, on each edge, to zero. Next we must discern a path from the source, $s$, to the sink, $t$.  We'll choose the next node to be $B$, and will set our current minimum capacity for the path to 4. Next, we select $C$ as our next node, updating our minimum capacity to 3. After heading to the sink, $t$, we update our minimum capacity to 2. We can now update the amount of flow passing through each edge in the path to our current minimum capacity, which in this case is 2. The progress so far can be seen in Figure \ref{fig:network2}.
+
+After this, we search for another path that still has capacity for flow. Fortunately, this is another one, as can be seen for $s \leadsto D \leadsto E \leadsto t$, there is a path with a minimum capacity of 1. We can send 1 unit of materials down this path, and it will fill $c(E,\ t)$. Finally, we check if there are any available paths from the source $s$ to the sink $t$, only to find that there are no more paths available with a minimum capacity greater than zero.
+
+From there, we can tally up the total amount of flow heading into the sink from the source, and discover that the maximum flow for this Network Flow is 3.
 
 
 \section{Implementation}
@@ -402,6 +407,7 @@ As can be seen in Figure \ref{fig:network1}, a flow network can be rather simple
 
 I decided to create my implementation using the Python language, as I am rather familiar with it and it would lead to rapid development. Although initially I had thought about working with C, I realized that it's more important to focus on the core implementation of the algorithm rather than getting bogged down in minor details regarding pointers and structures (again). To increase readability, I decided to create an "edge" class, which would be used in conjunction with associative arrays to delineate edges between nodes.
 
+\subsection{Edge}
 \begin{figure*}[t]
 \begin{lstlisting}
 class edge(object):
@@ -452,6 +458,7 @@ return total_flow
 
 As can be seen with my implementation of the edge in Figure \ref{fig:node}, I created a simple data structure that has a few member variables. The most obvious is the capacity, which is initially set to zero, as well as the flow, which is also set to zero. The capacity is set at creation of the edge, and is a value greater than zero. The flow is constantly changing during the calculations, as flow is sent into the nodes and set out of them. The $u$ and $v$ member variables are set to the name of the current node, as well as the node that is connected via the current edge. 
 
+\subsection{Algorithm}
 The actual algorithm is represented in Figure \ref{fig:algo}. We first begin by initializing a new graph, and set it equal to an empty associative array, also known as a dictionary in Python. We next build our edges, including them under the nodes which they connect, and applying the proper values for $u$ and $v$. 
 
 After we have built our graph, we set our initial node as the source, and begin to iterate through the edges connected to the source node. After this we set our minimum capacity to a set value, in this case a value that is over 9000, as in the domain that this implementation was written for, it is known that no values will be greater than that. We next create an empty list as the path, this is used to keep track of what nodes we are using to transfer our flow to the sink node, $t$.
@@ -461,7 +468,13 @@ We now enter a loop, which checks to ensure that we have not maximized the amoun
 We now can move on to the next node. First, however, we check to ensure that the next node is not the sink, as that would show that we are already at the end. Once we have a complete path, we can break out of checking for the minimum available capacity, as we should already have it. We now update the total flow by adding the value of the minimum capacity, which will should how much material will begin flowing from the source to the sink. After this, we iterate through all edges in the path, and increase the amount of flow in each of them by the minimum capacity of the entire path. We repeat this as many times as possible for each edge, and this will eventually give us the maximum flow.
 %\section{Other Algorithms}
 \section{Conclusion}
-Overall, I found the research performed for this paper to be interesting and helpful. Rather than thinking graphs as being representations of traveling salesman problems, or just a graph to represent highways between cities, the concept of a Network Flow representation is exceptional. It leads to several interesting applications in areas such as transportation, networking, and even military tactics.
+Overall, I found the research performed for this paper to be interesting and helpful. Rather than thinking graphs as being representations of traveling salesman problems, or just a graph to represent highways between cities, the concept of a Network Flow representation is exceptional. It leads to several interesting applications in areas such as transportation, networking, and even military tactics. This paper serves as a broad survey over the field of Maximum Flow and Network Flow graphs, and served as an exceptional introduction.
+
+\section*{Acknowledgements}
+The author would like to thank Lindsey Hughes for providing a location that was beneficial to study (as well as an epic sandwich). He would also like to express gratitude to Suzie Shdo, who assisted in locating relavant works for this study. And lastly, the author would like to extend a most gracious thanks to his professor, Dr. Erik Linstead, by whose good grace the author is (presumeably) not failed out of school for this class.
+
+Also, a large thanks go out to everyone in the author's life this semester, for putting up with him and helping make it his best yet.
+
 
 
 % An example of a floating figure using the graphicx package.
