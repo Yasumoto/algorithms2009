@@ -30,4 +30,23 @@ T.~H. Cormen, C.~E. Leiserson, R.~L. Rivest, and C.~Stein, \emph{Introduction
 ASIN/0070131511}
 \BIBentrySTDinterwordspacing
 
+\bibitem{Tucker:1977}
+\BIBentryALTinterwordspacing
+A.~Tucker, ``A note on convergence of the ford-fulkerson flow algorithm,''
+  \emph{Mathematics of Operations Research}, vol.~2, no.~2, pp. 143--144, 1977.
+  [Online]. Available: \url{http://www.jstor.org/stable/3689651}
+\BIBentrySTDinterwordspacing
+
+\bibitem{EK:321699}
+J.~Edmonds and R.~M. Karp, ``Theoretical improvements in algorithmic efficiency
+  for network flow problems,'' \emph{J. ACM}, vol.~19, no.~2, pp. 248--264,
+  1972.
+
+\bibitem{Wilk:1971}
+\BIBentryALTinterwordspacing
+W.~L. Wilkinson, ``An algorithm for universal maximal dynamic flows in a
+  network,'' \emph{Operations Research}, vol.~19, no.~7, pp. 1602--1612, 1971.
+  [Online]. Available: \url{http://www.jstor.org/stable/169181}
+\BIBentrySTDinterwordspacing
+
 \end{thebibliography}
